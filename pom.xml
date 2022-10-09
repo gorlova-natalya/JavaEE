@@ -6,10 +6,13 @@
 
     <groupId>org.example</groupId>
     <artifactId>javaEE</artifactId>
-    <packaging>pom</packaging>
+    <name>javaEE</name>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <modules>
         <module>lesson22</module>
+        <module>lesson24</module>
     </modules>
 
     <properties>
