@@ -2,46 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="main.css" />
-    <title>Title</title>
+    <link rel="stylesheet" href="main.css"/>
+    <title>Users Info</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+
 </head>
 <body>
-
-<a href="/servlet/users">
-    <%="Get list of users".toUpperCase()%>
-</a>
-
-<h3>Login Page</h3>
-
-<p style="color: red;">${errorString}</p>
-
-<form method="POST" action="${pageContext.request.contextPath}/login">
-    <input type="hidden" name="redirectId" value="${param.redirectId}" />
-    <table border="0">
-        <tr>
-            <td>User Name</td>
-            <td><input type="text" name="name" value= "${user.name}" /> </td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" value= "${user.password}" /> </td>
-        </tr>
-
-        <tr>
-            <td colspan ="2">
-                <input type="submit" value= "Submit" />
-                <a href="${pageContext.request.contextPath}/">Cancel</a>
-            </td>
-        </tr>
-    </table>
-</form>
-
-<a href="servlet/userInfo">
-        <%="User Info".toUpperCase()%>
-
-
+<div class="container">
+    <div class="row" style="margin-top: 25px">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Users</h3>
+                </div>
+                <div class="card-text">
+                    <table class="table">
+                        <tr>
+                            <th>Login</th>
+                            <th>Password</th>
+                        </tr>
+                        <tbody>
+                        <c:forEach items="${users}" var="user">
+                            <tr>
+                                <td>
+                                    <c:out value="${user.login}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${user.password}"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 25px">
+    <a href="users">
+            <%="Login Page".toUpperCase()%>
+</div>
 </body>
-
 </html>
 
 

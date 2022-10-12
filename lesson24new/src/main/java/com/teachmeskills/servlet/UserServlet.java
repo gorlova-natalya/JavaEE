@@ -32,4 +32,19 @@ public class UserServlet extends HttpServlet {
     req.setAttribute("users", users);
     getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
   }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String login = req.getParameter("login");
+    String password = req.getParameter("password");
+
+    try {
+      userService.createUser(login, password);
+    } catch (Exception ex) {
+      resp.sendRedirect("users?error=" + ex.getMessage());
+      return;
+    }
+    req.getSession().setAttribute("loggedIn", true);
+    resp.sendRedirect("main.jsp");
+  }
 }

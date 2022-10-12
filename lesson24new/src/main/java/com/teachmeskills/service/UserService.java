@@ -16,5 +16,10 @@ public class UserService {
   public List<User> findUsers() {
     return userRepository.findUsers();
   }
-
+  public void createUser(String login, String password) {
+    if (userRepository.getUser(login).isPresent()) {
+      throw new RuntimeException("User already exists");
+    }
+    userRepository.createUser(login, password);
+  }
 }
