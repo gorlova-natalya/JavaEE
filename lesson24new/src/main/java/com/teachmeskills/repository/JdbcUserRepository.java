@@ -24,7 +24,7 @@ public class JdbcUserRepository implements UserRepository {
             final List<User> users = new ArrayList<>();
             while (rs.next()) {
                 users.add(buildUser(rs));
-             }
+            }
             return users;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -43,6 +43,7 @@ public class JdbcUserRepository implements UserRepository {
                 return Optional.of(buildUser(rs));
             }
             return Optional.empty();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
