@@ -2,6 +2,7 @@ package com.teachmeskills.service;
 
 import com.teachmeskills.model.User;
 import com.teachmeskills.repository.UserRepository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +26,11 @@ public class UserService {
         userRepository.createUser(login, password);
     }
 
-    public boolean validate(String login, String password) {
-        return userRepository.findUsers().stream()
-                .anyMatch(user -> user.getLogin().equals(login) && user.getPassword().equals(password));
+    public Optional <User> getUser (String login) {
+        return userRepository.getUser(login);
     }
 
-    public User getUserByLogin(String login) {
-        Optional<User> user = userRepository.getUser(login);
-        return user.orElseThrow(() -> new RuntimeException("User not found"));
+    public List<User> findUsersStartWith(String login) {
+        return userRepository.findUsersStartWith(login);
     }
 }

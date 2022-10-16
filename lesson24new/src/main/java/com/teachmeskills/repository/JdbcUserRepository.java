@@ -17,8 +17,7 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public List<User> findUsers() {
-        try {
-            Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()){
             String sql = "select login, password from users";
             ResultSet rs = statement.executeQuery(sql);
             final List<User> users = new ArrayList<>();
@@ -33,12 +32,10 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public Optional<User> getUser(String login) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "select login, password from users where login = ?");
+        try (PreparedStatement statement = connection.prepareStatement(
+                "select login, password from users where login = ?")){
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
-
             if (rs.next()) {
                 return Optional.of(buildUser(rs));
             }
@@ -67,5 +64,20 @@ public class JdbcUserRepository implements UserRepository {
                 rs.getString("login"),
                 rs.getString("password")
         );
+    }
+
+    public List <User> findUsersStartWith (String login) {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "select login, password from users where login like concat('%', ?, '%')")){
+            statement.setString(1, login);
+            ResultSet rs = statement.executeQuery();
+            final List<User> users = new ArrayList<>();
+            while (rs.next()) {
+                users.add(buildUser(rs));
+            }
+            return users;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

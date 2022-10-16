@@ -27,7 +27,7 @@ public class DependencyInitializationContextListener implements ServletContextLi
             UserService userService = new UserService(repository);
             sce.getServletContext().setAttribute("userService", userService);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unable to establish connection with database");
         }
     }
 

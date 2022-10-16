@@ -8,7 +8,6 @@ import java.io.IOException;
 @WebFilter(value = "/main")
 public class SecurityFilter implements Filter {
 
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {

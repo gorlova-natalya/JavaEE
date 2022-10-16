@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
 </head>
 <body>
+<jsp:include page="/users"/>
 <div class="container">
     <div class="row" style="margin-top: 25px">
-        <jsp:include page="/users" />
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
@@ -49,6 +49,3 @@
 </c:if>
 </body>
 </html>
-
-
-
