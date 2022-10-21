@@ -2,10 +2,15 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.User;
 
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.sql.PreparedStatement;
 
 public class JdbcUserRepository implements UserRepository {
 
@@ -17,7 +22,7 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public List<User> findUsers() {
-        try (Statement statement = connection.createStatement()){
+        try (Statement statement = connection.createStatement()) {
             String sql = "select login, password from users";
             ResultSet rs = statement.executeQuery(sql);
             final List<User> users = new ArrayList<>();
@@ -33,7 +38,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public Optional<User> getUser(String login) {
         try (PreparedStatement statement = connection.prepareStatement(
-                "select login, password from users where login = ?")){
+                "select login, password from users where login = ?")) {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
@@ -66,9 +71,9 @@ public class JdbcUserRepository implements UserRepository {
         );
     }
 
-    public List <User> findUsersStartWith (String login) {
+    public List<User> findUsersStartWith(String login) {
         try (PreparedStatement statement = connection.prepareStatement(
-                "select login, password from users where login like concat('%', ?, '%')")){
+                "select login, password from users where login like concat('%', ?, '%')")) {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
             final List<User> users = new ArrayList<>();

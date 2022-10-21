@@ -21,7 +21,7 @@
         <spotbugs.maven.plugin.version>4.7.1.1</spotbugs.maven.plugin.version>
         <checkstyle.maven.plugin.version>3.2.0</checkstyle.maven.plugin.version>
         <checkstyle.config.location>codequality/checkstyle.xml</checkstyle.config.location>
-        <pmd.maven.plugin.version>3.18.0</pmd.maven.plugin.version>
+        <pmd.maven.plugin.version>3.17.0</pmd.maven.plugin.version>
         <org.mockito.version>4.4.0</org.mockito.version>
     </properties>
 
@@ -41,6 +41,11 @@
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-commons</artifactId>
                 <version>1.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>1.12.14</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -110,6 +115,11 @@
             <version>1.17.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.fusesource.jansi</groupId>
+            <artifactId>jansi</artifactId>
+            <version>2.4.0</version>
+        </dependency>
     </dependencies>
 
 
@@ -147,7 +157,7 @@
                         <id>checkstyle-validate</id>
                         <phase>validate</phase>
                         <configuration>
-                            <encoding>UTF-8</encoding>
+                            <inputEncoding>UTF-8</inputEncoding>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
                             <logViolationCountToConsole>true</logViolationCountToConsole>
                         </configuration>
@@ -165,11 +175,9 @@
                     <linkXRef>false</linkXRef>
                     <sourceEncoding>UTF-8</sourceEncoding>
                     <includeTests>false</includeTests>
-                    <!--suppress UnresolvedMavenProperty -->
-                    <failurePriority>${pmd.failurePriority}</failurePriority>
                     <failOnViolation>true</failOnViolation>
-                     <rulesets>
-                         <ruleset>codequality/pmd-ruleset.xml</ruleset>
+                    <rulesets>
+                        <ruleset>codequality/pmd-ruleset.xml</ruleset>
                     </rulesets>
                 </configuration>
                 <executions>
@@ -221,16 +229,16 @@
                         <configuration>
                             <rules>
                                 <banDuplicatePomDependencyVersions/>
-                                <DependencyConvergence/>
+                                <dependencyConvergence/>
                                 <bannedDependencies>
                                     <excludes>
-                                <!-- This should not exist as it will force SLF4J calls to be delegated to log4j -->
+                                        <!-- This should not exist as it will force SLF4J calls to be delegated to log4j -->
                                         <exclude>org.slf4j:slf4j-log4j12</exclude>
-                                <!-- This should not exist as it will force SLF4J calls to be delegated to jul -->
+                                        <!-- This should not exist as it will force SLF4J calls to be delegated to jul -->
                                         <exclude>org.slf4j:slf4j-jdk14</exclude>
-                                <!-- Ensure only the slf4j binding for logback is on the classpath -->
+<!--                                        &lt;!&ndash; Ensure only the slf4j binding for logback is on the classpath &ndash;&gt;-->
                                         <exclude>log4j:log4j</exclude>
-                                <!-- As recommended from the slf4j guide, exclude commons-logging -->
+<!--                                         As recommended from the slf4j guide, exclude commons-logging -->
                                         <exclude>commons-logging:commons-logging</exclude>
                                     </excludes>
                                 </bannedDependencies>
@@ -256,5 +264,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>
