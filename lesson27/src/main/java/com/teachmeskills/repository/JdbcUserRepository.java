@@ -54,9 +54,8 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public void createUser(String login, String password) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "insert into users (login, password) values (?, ?)");
+        try (PreparedStatement statement = connection.prepareStatement(
+                "insert into users (login, password) values (?, ?)")) {
             statement.setString(1, login);
             statement.setString(2, password);
             statement.execute();
