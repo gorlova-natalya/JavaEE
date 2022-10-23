@@ -1,7 +1,7 @@
 package com.teachmeskills.servlet;
 
 import com.teachmeskills.service.UserService;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Log4j2
+@Slf4j
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 

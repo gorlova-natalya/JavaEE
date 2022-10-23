@@ -2,7 +2,7 @@ package com.teachmeskills.servlet;
 
 import com.teachmeskills.model.User;
 import com.teachmeskills.service.UserService;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
 
-@Log4j2
+@Slf4j
 @WebServlet("/loginUser")
 public class LoginServlet extends HttpServlet {
 

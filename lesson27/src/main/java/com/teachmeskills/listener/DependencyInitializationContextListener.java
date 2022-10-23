@@ -3,7 +3,7 @@ package com.teachmeskills.listener;
 import com.teachmeskills.repository.JdbcUserRepository;
 import com.teachmeskills.repository.UserRepository;
 import com.teachmeskills.service.UserService;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @WebListener
-@Log4j2
+@Slf4j
 public class DependencyInitializationContextListener implements ServletContextListener {
 
     @Override

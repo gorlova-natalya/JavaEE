@@ -1,8 +1,7 @@
 package com.teachmeskills.repository;
 
 import com.teachmeskills.model.User;
-import lombok.extern.log4j.Log4j2;
-
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.sql.PreparedStatement;
 
-@Log4j2
+@Slf4j
 public class JdbcUserRepository implements UserRepository {
 
     private final Connection connection;

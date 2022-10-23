@@ -14,6 +14,13 @@ public class TwoSumsTest {
 
     private final TwoSums twoSums = new TwoSums();
 
+    @ParameterizedTest
+    @MethodSource("provideTestValues")
+    public void doTest1(int[] incomingNumbers, int desiredValue, int[] expectedResult) {
+        int[] receivedResult = twoSums.calculate(incomingNumbers, desiredValue);
+        Assertions.assertArrayEquals(expectedResult, receivedResult);
+    }
+
     private static Stream<Arguments> provideTestValues() {
         return Stream.of(
                 Arguments.of(new int[]{1, 2, 3}, 4, new int[]{0, 2}),
@@ -21,12 +28,5 @@ public class TwoSumsTest {
                 Arguments.of(null, 5, null),
                 Arguments.of(new int[]{1234, 5678, 9012}, 5, null)
         );
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideTestValues")
-    public void doTest1(int[] incomingNumbers, int desiredValue, int[] expectedResult) {
-        int[] receivedResult = twoSums.calculate(incomingNumbers, desiredValue);
-        Assertions.assertArrayEquals(expectedResult, receivedResult);
     }
 }

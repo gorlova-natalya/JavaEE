@@ -53,4 +53,17 @@ public class UserServiceTest {
                 .hasMessage("User already exists");
 
     }
+
+    @Test
+    void shouldThrowExceptionWhenNullPassword() {
+        final String login = "any_Login";
+        final String password = "";
+        this.userRepository.createUser(login, password);
+
+        final RuntimeException actual = assertThrows(
+                RuntimeException.class, () -> sut.createUser(login, password));
+
+        assertThat(actual)
+                .hasMessage("User password is empty");
+    }
 }

@@ -2,12 +2,11 @@ package com.teachmeskills.service;
 
 import com.teachmeskills.model.User;
 import com.teachmeskills.repository.UserRepository;
-import lombok.extern.log4j.Log4j2;
-
+import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Optional;
 
-@Log4j2
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;

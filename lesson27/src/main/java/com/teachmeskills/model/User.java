@@ -1,10 +1,14 @@
 package com.teachmeskills.model;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Value
+@Getter
+@Setter
+@AllArgsConstructor
 public class User {
 
-     String login;
-     String password;
+    private String login;
+    private String password;
 }
