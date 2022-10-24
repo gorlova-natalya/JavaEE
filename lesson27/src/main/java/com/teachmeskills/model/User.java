@@ -1,14 +1,12 @@
 package com.teachmeskills.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Value;
+import lombok.experimental.NonFinal;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Value
+@NonFinal
 public class User {
 
-    private String login;
-    private String password;
+    String login;
+    String password;
 }
