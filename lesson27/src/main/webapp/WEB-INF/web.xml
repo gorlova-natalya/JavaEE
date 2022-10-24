@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+		 version="2.4">
+	<context-param>
+		<param-name>db_url</param-name>
+		<param-value>jdbc:postgresql://demo-postgres:5432/postgres</param-value>
+	</context-param>
+	<context-param>
+		<param-name>db_user</param-name>
+		<param-value>postgres</param-value>
+	</context-param>
+	<context-param>
+		<param-name>db_password</param-name>
+		<param-value>postgres</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>Main</servlet-name>
+		<jsp-file>/main.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Main</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Registration</servlet-name>
+		<jsp-file>/reg.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/reg</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<jsp-file>/login.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+</web-app>
