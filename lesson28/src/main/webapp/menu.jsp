@@ -12,11 +12,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/servlet/users">Users<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Friends</a>
-            <a class="nav-item nav-link" href="#">Friends Requests</a>
-            <a class="nav-item nav-link" href="#">Outgoing Friends Requests</a>
-            <a class="nav-item nav-link disabled" href="/servlet/login">Disabled</a>
+            <a class="nav-item nav-link active" href="users">Users<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="friends">Friends</a>
+            <a class="nav-item nav-link" href="incomingFriendRequests">Friends Requests</a>
+            <a class="nav-item nav-link" href="outcomingFriendRequests">Outgoing Friends Requests</a>
+            <a class="nav-item nav-link" href="login">Login page</a>
         </div>
     </div>
 </nav>

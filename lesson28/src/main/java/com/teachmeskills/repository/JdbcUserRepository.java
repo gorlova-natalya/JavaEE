@@ -24,7 +24,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public List<User> findUsers() {
         try (Statement statement = connection.createStatement()) {
-            String sql = "select login, password from users";
+            String sql = "select id, login, password from users";
             ResultSet rs = statement.executeQuery(sql);
             final List<User> users = new ArrayList<>();
             while (rs.next()) {
@@ -38,9 +38,9 @@ public class JdbcUserRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> getUser(String login) {
+    public Optional<User> getUserByLogin(String login) {
         try (PreparedStatement statement = connection.prepareStatement(
-                "select login, password from users where login = ?")) {
+                "select id, login, password from users where login = ?")) {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
@@ -66,6 +66,7 @@ public class JdbcUserRepository implements UserRepository {
 
     private User buildUser(ResultSet rs) throws SQLException {
         return new User(
+                rs.getLong("id"),
                 rs.getString("login"),
                 rs.getString("password")
         );
@@ -73,7 +74,7 @@ public class JdbcUserRepository implements UserRepository {
 
     public List<User> findUsersStartWith(String login) {
         try (PreparedStatement statement = connection.prepareStatement(
-                "select login, password from users where login like concat('%', ?, '%')")) {
+                "select id, login, password from users where login like concat('%', ?, '%')")) {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
             final List<User> users = new ArrayList<>();
@@ -83,6 +84,21 @@ public class JdbcUserRepository implements UserRepository {
             return users;
         } catch (SQLException e) {
             log.info("Users not found");
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Optional<User> getUserById(long userId) {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "select id, login, password from users where id = ?")) {
+            statement.setLong(1, userId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return Optional.of(buildUser(rs));
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

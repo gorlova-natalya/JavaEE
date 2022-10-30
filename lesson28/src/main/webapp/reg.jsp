@@ -1,5 +1,3 @@
-<%@ page import="com.teachmeskills.model.User" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,7 +5,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
 <div class="container">
     <div class="row" style="margin-top: 25px">
         <div class="card">

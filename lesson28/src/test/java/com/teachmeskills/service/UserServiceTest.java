@@ -29,7 +29,7 @@ public class UserServiceTest {
         final String login = "any_login";
         final String password = "any_password";
 
-        given(userRepository.getUser(login)).willReturn(Optional.empty());
+        given(userRepository.getUserByLogin(login)).willReturn(Optional.empty());
 
         sut.createUser(login, password);
 
@@ -44,7 +44,7 @@ public class UserServiceTest {
         final String password = "any_password";
         final User user = mock(User.class);
 
-        given(userRepository.getUser(login)).willReturn(Optional.of(user));
+        given(userRepository.getUserByLogin(login)).willReturn(Optional.of(user));
 
         final RuntimeException actual = assertThrows(
                 RuntimeException.class, () -> sut.createUser(login, password));

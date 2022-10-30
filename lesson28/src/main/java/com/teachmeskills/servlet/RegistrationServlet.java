@@ -36,6 +36,5 @@ public class RegistrationServlet extends HttpServlet {
         }
         log.info("User {} registered", login);
         resp.sendRedirect("reg");
-
     }
 }

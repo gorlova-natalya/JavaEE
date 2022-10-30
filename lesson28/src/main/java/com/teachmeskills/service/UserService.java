@@ -21,7 +21,7 @@ public class UserService {
 
     public void createUser(String login, String password) {
         log.info("Creating user with login {}", login);
-        if (userRepository.getUser(login).isPresent()) {
+        if (userRepository.getUserByLogin(login).isPresent()) {
             throw new RuntimeException("User already exists");
         }
         if (password.isEmpty()) {
@@ -33,7 +33,11 @@ public class UserService {
     }
 
     public Optional<User> getUser(String login) {
-        return userRepository.getUser(login);
+        return userRepository.getUserByLogin(login);
+    }
+
+    public Optional<User> getUserById(long userId) {
+        return userRepository.getUserById(userId);
     }
 
     public List<User> findUsersStartWith(String login) {

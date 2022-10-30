@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         Optional<User> user = userService.getUser(login);
 
         if (user.isPresent() && user.get().getPassword().equals(password)) {
-            request.getSession().setAttribute("loggedIn", true);
+            request.getSession().setAttribute("loggedInUserId", user.get().getId());
             log.info("User {} logged in", login);
             response.sendRedirect("users");
         } else {

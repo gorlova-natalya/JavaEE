@@ -1,11 +1,10 @@
-<%@ page import="com.teachmeskills.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Users Info</title>
+    <title>Friends</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
 </head>
 <body>
@@ -15,33 +14,23 @@
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
-                    <h3>Users</h3>
+                    <h3>Friends</h3>
                 </div>
-                <c:set var="loggedUserId" value='<%= session.getAttribute("loggedInUserId") %>'/>
                 <div class="card-text">
                     <table class="table">
                         <tr>
+
                             <th>Login</th>
                             <th>Password</th>
-                            <th>Add friend</th>
                         </tr>
                         <tbody>
-                        <c:forEach items="${users}" var="user">
+                        <c:forEach items="${friends}" var="user">
                             <tr>
                                 <td>
                                     <c:out value="${user.login}"/>
                                 </td>
                                 <td>
                                     <c:out value="${user.password}"/>
-                                </td>
-                                <td>
-                                    <c:if test="${loggedUserId != user.id}">
-                                        <form action="addFriend" method="post">
-                                            <input type="hidden" name="send_fr" value="${user.id}"/>
-                                            <button type="submit" class="btn btn-primary" name="button">Add friend
-                                            </button>
-                                        </form>
-                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -52,12 +41,5 @@
         </div>
     </div>
 </div>
-<c:if test="${queryError != null }">
-    <div class="row" style="margin-top: 25px">
-        <div class="alert alert-danger" role="alert">
-                ${queryError}
-        </div>
-    </div>
-</c:if>
 </body>
 </html>

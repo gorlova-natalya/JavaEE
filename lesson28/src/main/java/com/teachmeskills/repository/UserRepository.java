@@ -9,9 +9,11 @@ public interface UserRepository {
 
     List<User> findUsers();
 
-    Optional<User> getUser(String login);
+    Optional<User> getUserByLogin(String login);
 
     void createUser(String login, String password);
 
     List<User> findUsersStartWith(String login);
+
+    Optional<User> getUserById(long userId);
 }

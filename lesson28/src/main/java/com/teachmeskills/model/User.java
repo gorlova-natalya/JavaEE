@@ -7,6 +7,7 @@ import lombok.experimental.NonFinal;
 @NonFinal
 public class User {
 
+    long id;
     String login;
     String password;
 }

@@ -47,4 +47,33 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>AcceptFriend</servlet-name>
+		<jsp-file>/incomingRequests.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AcceptFriend</servlet-name>
+		<url-pattern>/incomingRequests</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Friends</servlet-name>
+		<jsp-file>/friendList.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Friends</servlet-name>
+		<url-pattern>/friendList</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OutcomingRequests</servlet-name>
+		<jsp-file>/outcomingRequests.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>OutcomingRequests</servlet-name>
+		<url-pattern>/outcomingRequests</url-pattern>
+	</servlet-mapping>
 </web-app>
