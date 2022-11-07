@@ -51,6 +51,6 @@ public class FriendServlet extends HttpServlet {
         final long requestTo = Long.parseLong(req.getParameter("delete"));
         friendService.deleteFriend(requestFrom, requestTo);
         messageService.deleteDialog(requestFrom, requestTo);
-        resp.sendRedirect(req.getHeader("Referer"));
+        resp.sendRedirect("friends");
     }
 }
