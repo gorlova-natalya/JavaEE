@@ -28,8 +28,8 @@ public class UserService {
             log.info("User password is empty");
             throw new RuntimeException("User password is empty");
         }
-        log.info("User with login {} successfully create", login);
         userRepository.createUser(login, password);
+        log.info("User with login {} successfully create", login);
     }
 
     public Optional<User> getUser(String login) {

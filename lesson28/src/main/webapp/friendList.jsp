@@ -32,6 +32,19 @@
                                 <td>
                                     <c:out value="${user.password}"/>
                                 </td>
+                                <td  class="col-1">
+                                    <form action="sendMessage" method="get">
+                                        <input type="hidden" name="message_to" value="${user.id}"/>
+                                        <button type="submit" class="btn btn-primary" name="button">Dialog</button>
+                                    </form>
+                                </td>
+                                <td  class="col-1">
+                                    <form action="friends" method="post">
+                                        <input type="hidden" name="delete" value="${user.id}"/>
+                                        <input type="hidden" name="redirect" value="friends"/>
+                                        <button type="submit" class="btn btn-primary" name="button">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

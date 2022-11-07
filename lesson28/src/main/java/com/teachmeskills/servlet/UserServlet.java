@@ -2,7 +2,6 @@ package com.teachmeskills.servlet;
 
 import com.teachmeskills.model.User;
 import com.teachmeskills.service.UserService;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
@@ -26,9 +24,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        Map<String, String[]> parameterMap = req.getParameterMap();
-        if (parameterMap.containsKey("login")) {
-            String loginParameter = req.getParameter("login");
+        String loginParameter = req.getParameter("login");
+        if (loginParameter != null && !loginParameter.isEmpty()) {
             List<User> users = userService.findUsersStartWith(loginParameter);
             req.setAttribute("users", users);
         } else {

@@ -1,7 +1,6 @@
 package com.teachmeskills.servlet;
 
 import com.teachmeskills.service.FriendRequestService;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

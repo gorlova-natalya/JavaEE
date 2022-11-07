@@ -102,6 +102,13 @@
             <property name="severity" value="warning"/>
         </module>
 
+        <module name="Regexp">
+            <property name="message" value="Blank line at end of block is not allowed"/>
+            <property name="format" value="^\s*$^\s*\}"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="illegalPattern" value="true"/>
+        </module>
+
         <module name="Indentation">
             <property name="basicOffset" value="4"/>
             <property name="braceAdjustment" value="0"/>

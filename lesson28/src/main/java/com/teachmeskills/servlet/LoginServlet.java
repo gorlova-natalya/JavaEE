@@ -39,7 +39,6 @@ public class LoginServlet extends HttpServlet {
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
         Optional<User> user = userService.getUser(login);
-
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             request.getSession().setAttribute("loggedInUserId", user.get().getId());
             log.info("User {} logged in", login);

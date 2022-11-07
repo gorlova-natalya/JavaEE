@@ -76,4 +76,14 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<servlet-name>OutcomingRequests</servlet-name>
 		<url-pattern>/outcomingRequests</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Dialog</servlet-name>
+		<jsp-file>/dialog.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Dialog</servlet-name>
+		<url-pattern>/dialog</url-pattern>
+	</servlet-mapping>
 </web-app>

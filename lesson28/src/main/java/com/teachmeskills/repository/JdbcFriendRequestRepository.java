@@ -2,7 +2,6 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.FriendRequest;
 import lombok.extern.slf4j.Slf4j;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,7 +80,6 @@ public class JdbcFriendRequestRepository implements FriendRequestRepository {
             }
             return friendRequests;
         } catch (SQLException e) {
-            log.info("Request not found");
             throw new RuntimeException(e);
         }
     }

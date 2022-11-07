@@ -2,7 +2,6 @@ package com.teachmeskills.servlet;
 
 import com.teachmeskills.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +29,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             userService.createUser(login, password);
         } catch (Exception ex) {
-            log.error("User not created");
+            log.error("User {} not created", login + ex);
             resp.sendRedirect("reg?error=" + ex.getMessage());
             return;
         }

@@ -2,10 +2,8 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.Friend;
 import lombok.extern.slf4j.Slf4j;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,6 +74,18 @@ public class JdbcFriendRepository implements FriendRepository {
         }
     }
 
-
-
+    @Override
+    public void deleteFriend(long requestFrom, long requestTo) {
+        try (PreparedStatement statement = connection.prepareStatement(
+                "delete from friends where user_id = ? and friend_id = ?")) {
+            statement.setLong(1, requestFrom);
+            statement.setLong(2, requestTo);
+            statement.execute();
+            statement.setLong(1, requestTo);
+            statement.setLong(2, requestFrom);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

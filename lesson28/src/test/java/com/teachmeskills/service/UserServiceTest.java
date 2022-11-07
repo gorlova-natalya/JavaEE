@@ -51,11 +51,10 @@ public class UserServiceTest {
 
         assertThat(actual)
                 .hasMessage("User already exists");
-
     }
 
     @Test
-    void shouldThrowExceptionWhenNullPassword() {
+    void shouldThrowExceptionWhenEmptyPassword() {
         final String login = "any_Login";
         final String password = "";
         this.userRepository.createUser(login, password);

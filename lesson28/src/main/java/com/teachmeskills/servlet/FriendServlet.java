@@ -1,9 +1,9 @@
 package com.teachmeskills.servlet;
 
-
 import com.teachmeskills.model.Friend;
 import com.teachmeskills.model.User;
 import com.teachmeskills.service.FriendService;
+import com.teachmeskills.service.MessageService;
 import com.teachmeskills.service.UserService;
 
 import javax.servlet.ServletConfig;
@@ -17,17 +17,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet ("/friends")
+@WebServlet("/friends")
 public class FriendServlet extends HttpServlet {
 
     private FriendService friendService;
     private UserService userService;
+    private MessageService messageService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         friendService = (FriendService) config.getServletContext().getAttribute("friendService");
         userService = (UserService) config.getServletContext().getAttribute("userService");
+        messageService = (MessageService) config.getServletContext().getAttribute("messageService");
     }
 
     @Override
@@ -41,5 +43,14 @@ public class FriendServlet extends HttpServlet {
                 .collect(Collectors.toList());
         req.setAttribute("friends", friends);
         getServletContext().getRequestDispatcher("/friendList").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final long requestFrom = (long) req.getSession().getAttribute("loggedInUserId");
+        final long requestTo = Long.parseLong(req.getParameter("delete"));
+        friendService.deleteFriend(requestFrom, requestTo);
+        messageService.deleteDialog(requestFrom, requestTo);
+        resp.sendRedirect(req.getHeader("Referer"));
     }
 }

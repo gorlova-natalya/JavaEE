@@ -2,7 +2,6 @@ package com.teachmeskills.service;
 
 import com.teachmeskills.model.Friend;
 import com.teachmeskills.repository.FriendRepository;
-
 import java.util.List;
 
 public class FriendService {
@@ -15,5 +14,9 @@ public class FriendService {
 
     public List<Friend> getUserFriends(long userId) {
         return friendRepository.getUserFriends(userId);
+    }
+
+    public void deleteFriend(long requestFrom, long requestTo) {
+        friendRepository.deleteFriend(requestFrom, requestTo);
     }
 }

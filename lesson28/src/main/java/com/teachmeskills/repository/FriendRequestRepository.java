@@ -1,7 +1,6 @@
 package com.teachmeskills.repository;
 
 import com.teachmeskills.model.FriendRequest;
-
 import java.util.List;
 import java.util.Optional;
 

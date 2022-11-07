@@ -52,12 +52,5 @@
         </div>
     </div>
 </div>
-<c:if test="${queryError != null }">
-    <div class="row" style="margin-top: 25px">
-        <div class="alert alert-danger" role="alert">
-                ${queryError}
-        </div>
-    </div>
-</c:if>
 </body>
 </html>
