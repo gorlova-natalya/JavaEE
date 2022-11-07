@@ -35,7 +35,7 @@ public class JdbcMessageRepository implements MessageRepository {
     }
 
     @Override
-    public List<Message> getDialogMessages(long messageFrom, long messageTo) {
+    public List<Message> getMessages(long messageFrom, long messageTo) {
         try (PreparedStatement statement = connection.prepareStatement(
                 "select * from messages where user_id = ? and friend_id = ? order by created_at DESC ")) {
             final List<Message> messages = new ArrayList<>();

@@ -20,7 +20,7 @@ public class MessageService {
     }
 
     public List<Message> getMessages(long messageFrom, long messageTo) {
-        return messageRepository.getDialogMessages(messageFrom, messageTo).stream()
+        return messageRepository.getMessages(messageFrom, messageTo).stream()
                 .sorted(Comparator.comparing(Message::getCreatedAt).reversed())
                 .collect(Collectors.toList());
     }
