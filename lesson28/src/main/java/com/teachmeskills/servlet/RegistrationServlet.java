@@ -26,10 +26,11 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
+        String hashedPassword = userService.hashingPassword(password);
         try {
-            userService.createUser(login, password);
+            userService.createUser(login, hashedPassword);
         } catch (Exception ex) {
-            log.error("User {} not created", login + ex);
+            log.error("User {} not created", login, ex);
             resp.sendRedirect("reg?error=" + ex.getMessage());
             return;
         }

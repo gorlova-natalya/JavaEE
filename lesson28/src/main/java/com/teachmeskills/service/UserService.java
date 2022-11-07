@@ -1,8 +1,12 @@
 package com.teachmeskills.service;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.teachmeskills.model.User;
 import com.teachmeskills.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +14,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private static final String SECRET = "SECRET";
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -17,6 +22,12 @@ public class UserService {
 
     public List<User> findUsers() {
         return userRepository.findUsers();
+    }
+
+    public String hashingPassword(String password) {
+        final BCrypt.Hasher hasher = BCrypt.with(new SecureRandom(SECRET.getBytes(StandardCharsets.UTF_8)));
+        final String hashedPassword = hasher.hashToString(12, password.toCharArray());
+        return hashedPassword;
     }
 
     public void createUser(String login, String password) {

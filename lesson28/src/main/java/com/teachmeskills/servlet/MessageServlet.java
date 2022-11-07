@@ -15,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 @WebServlet("/sendMessage")
-public class SendMessageServlet extends HttpServlet {
+public class MessageServlet extends HttpServlet {
 
     private MessageService messageService;
     private UserService userService;
@@ -32,7 +32,7 @@ public class SendMessageServlet extends HttpServlet {
             throws ServletException, IOException {
         final long messageTo = Long.parseLong(request.getParameter("message_to"));
         final long messageFrom = (long) request.getSession().getAttribute("loggedInUserId");
-        List<Message> messages = messageService.getDialogMessages(messageFrom, messageTo);
+        List<Message> messages = messageService.getMessages(messageFrom, messageTo);
         request.setAttribute("message_to", messageTo);
         request.setAttribute("messages", messages);
         request.setAttribute("userName", userService.getUserById(messageTo).orElseThrow().getLogin());

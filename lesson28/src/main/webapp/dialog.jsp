@@ -17,7 +17,7 @@
                 <div class="card-text">
                     <table class="table">
                         <tr>
-                            <th>Message to <%= request.getParameter("message_to")%>
+                            <th>Message to <%= request.getAttribute("userName")%>
                             </th>
                             <th></th>
                         </tr>
@@ -26,11 +26,9 @@
                             <td>
                                 <form action="sendMessage" method="POST">
                                     <div class="input-group">
-                                        <%--                                        <div class="input-group-prepend">--%>
-                                        <%--&lt;%&ndash;                                            <span class="input-group-text">Text message</span>&ndash;%&gt;--%>
-                                        <%--&lt;%&ndash;                                            <input type="text" class="form-control" id="textMessage" placeholder="Text Message">&ndash;%&gt;--%>
-                                        <%--                                        </div>--%>
-                                        <textarea class="form-control" aria-label="With textarea" name="message"
+                                        <textarea class="form-control"
+                                                  aria-label="With textarea"
+                                                  name="message"
                                                   placeholder="Write message"></textarea>
                                     </div>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -58,8 +56,9 @@
                                 <c:when test="${loggedUserId == message.messageFrom}">
                                     <tr>
                                         <td align="left" class="col">
-                                            <fmt:parseDate value="${message.createdAt}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-                                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }" />
+                                            <fmt:parseDate value="${message.createdAt}" pattern="yyyy-MM-dd'T'HH:mm"
+                                                           var="parsedDateTime" type="both"/>
+                                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }"/>
                                         </td>
                                         <td align="left" class="col-6">
                                             <c:out value="${message.messageText}"/>
@@ -78,8 +77,9 @@
                                             <c:out value="${message.messageText}"/>
                                         </td>
                                         <td align="right" class="col">
-                                            <fmt:parseDate value="${message.createdAt}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-                                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }" />
+                                            <fmt:parseDate value="${message.createdAt}" pattern="yyyy-MM-dd'T'HH:mm"
+                                                           var="parsedDateTime" type="both"/>
+                                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }"/>
                                         </td>
                                     </tr>
                                 </c:otherwise>

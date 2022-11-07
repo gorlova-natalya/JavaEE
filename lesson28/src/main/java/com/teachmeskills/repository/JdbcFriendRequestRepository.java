@@ -51,7 +51,7 @@ public class JdbcFriendRequestRepository implements FriendRequestRepository {
             log.info("Creating request {}:{}", requestFrom, requestTo);
             statement.execute();
         } catch (SQLException e) {
-            log.info("Create request fail");
+            log.error("Create request fail");
             throw new RuntimeException(e);
         }
     }
@@ -80,6 +80,7 @@ public class JdbcFriendRequestRepository implements FriendRequestRepository {
             }
             return friendRequests;
         } catch (SQLException e) {
+            log.error("Requests for {} not found", userId, e);
             throw new RuntimeException(e);
         }
     }
@@ -96,7 +97,7 @@ public class JdbcFriendRequestRepository implements FriendRequestRepository {
             }
             return friendRequests;
         } catch (SQLException e) {
-            log.info("Request not found");
+            log.error("Requests from {} not found", inviterId, e);
             throw new RuntimeException(e);
         }
     }
