@@ -1,7 +1,10 @@
 package com.teachmeskills.listener;
 
+import com.teachmeskills.properties.HashProperties;
+import com.teachmeskills.repository.BcryptHashPassword;
 import com.teachmeskills.repository.FriendRepository;
 import com.teachmeskills.repository.FriendRequestRepository;
+import com.teachmeskills.repository.HashPassword;
 import com.teachmeskills.repository.JdbcFriendRepository;
 import com.teachmeskills.repository.JdbcFriendRequestRepository;
 import com.teachmeskills.repository.JdbcMessageRepository;
@@ -36,7 +39,9 @@ public class DependencyInitializationContextListener implements ServletContextLi
             UserRepository repository = new JdbcUserRepository(con);
             FriendRepository friendRepository = new JdbcFriendRepository(con);
             MessageRepository messageRepository = new JdbcMessageRepository(con);
-            UserService userService = new UserService(repository);
+            HashProperties hashProperties = new HashProperties();
+            HashPassword hashPassword = new BcryptHashPassword(hashProperties);
+            UserService userService = new UserService(repository, hashPassword);
             FriendRequestRepository friendRequestRepository = new JdbcFriendRequestRepository(con);
             FriendRequestService requestService =
                     new FriendRequestService(friendRequestRepository, friendRepository, userService);

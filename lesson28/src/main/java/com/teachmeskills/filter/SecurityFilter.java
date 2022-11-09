@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/*")
 public class SecurityFilter implements Filter {
 
-    private static final Set<String> ALLOWED_PATHS = Set.of("/login", "/reg", "/loginUser");
+    private static final Set<String> ALLOWED_PATHS = Set.of("/login", "/reg", "/loginUser", "/registration");
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

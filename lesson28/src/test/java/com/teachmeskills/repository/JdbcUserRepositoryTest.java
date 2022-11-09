@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import com.teachmeskills.model.User;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class JdbcUserRepositoryTest {
 

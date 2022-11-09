@@ -16,9 +16,12 @@ public class JdbcUserRepository implements UserRepository {
 
     private final Connection connection;
 
+
     public JdbcUserRepository(Connection connection) {
         this.connection = connection;
     }
+
+
 
     @Override
     public List<User> findUsers() {

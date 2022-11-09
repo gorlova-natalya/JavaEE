@@ -1,10 +1,8 @@
 package com.teachmeskills.servlet;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.teachmeskills.model.User;
 import com.teachmeskills.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 @Slf4j
@@ -41,10 +38,9 @@ public class LoginServlet extends HttpServlet {
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
         String hashedPassword = userService.hashingPassword(password);
-        final BCrypt.Result verify = BCrypt.verifyer()
-                .verify(password.getBytes(StandardCharsets.UTF_8), hashedPassword.getBytes(StandardCharsets.UTF_8));
+//        final BCrypt.Result verify = userService.validatePassword(password, hashedPassword);
         Optional<User> user = userService.getUser(login);
-        if (user.isPresent() && verify.verified) {
+        if (user.isPresent() && userService.validatePassword(password, hashedPassword)) {
             request.getSession().setAttribute("loggedInUserId", user.get().getId());
             log.info("User {} logged in", login);
             response.sendRedirect("users");
