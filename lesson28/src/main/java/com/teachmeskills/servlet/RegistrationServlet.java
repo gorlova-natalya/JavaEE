@@ -1,6 +1,6 @@
 package com.teachmeskills.servlet;
 
-import com.teachmeskills.service.UserService;
+import com.teachmeskills.fasade.UserFacade;
 import lombok.extern.slf4j.Slf4j;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,21 +14,21 @@ import java.io.IOException;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
-    private UserService userService;
+    private UserFacade userFacade;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        userService = (UserService) config.getServletContext().getAttribute("userService");
+        userFacade = (UserFacade) config.getServletContext().getAttribute("userFacade");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        final String hashedPassword = userService.hashingPassword(password);
+        final String hashedPassword = userFacade.hashingPassword(password);
         try {
-            userService.createUser(login, hashedPassword);
+            userFacade.createUser(login, hashedPassword);
         } catch (Exception ex) {
             log.error("User {} not created", login, ex);
             resp.sendRedirect("reg?error=" + ex.getMessage());

@@ -1,8 +1,9 @@
 package com.teachmeskills.servlet;
 
+import com.teachmeskills.fasade.FriendRequestFacade;
 import com.teachmeskills.model.User;
-import com.teachmeskills.service.FriendRequestService;
 import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,19 +17,18 @@ import java.util.List;
 @WebServlet("/incomingFriendRequests")
 public class IncomingFriendRequestServlet extends HttpServlet {
 
-    private FriendRequestService friendRequestService;
+    private FriendRequestFacade friendRequestFacade;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        friendRequestService = (FriendRequestService) config.getServletContext()
-                .getAttribute("friendRequestService");
+        friendRequestFacade = (FriendRequestFacade) config.getServletContext().getAttribute("friendRequestFacade");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final long requestTo = (long) req.getSession().getAttribute("loggedInUserId");
-        List<User> users = friendRequestService.getUsersByIncomingRequests(requestTo);
+        List<User> users = friendRequestFacade.getUsersByIncomingRequests(requestTo);
         req.setAttribute("incomingRequests", users);
         getServletContext().getRequestDispatcher("/incomingRequests").forward(req, resp);
     }
@@ -38,7 +38,7 @@ public class IncomingFriendRequestServlet extends HttpServlet {
         final long requestFrom = Long.parseLong(req.getParameter("accept_fr"));
         final long requestTo = (long) req.getSession().getAttribute("loggedInUserId");
         try {
-            friendRequestService.acceptRequest(requestFrom, requestTo);
+            friendRequestFacade.acceptRequest(requestFrom, requestTo);
         } catch (Exception ex) {
             resp.sendRedirect("incomingFriendRequests?error=" + ex.getMessage());
             return;

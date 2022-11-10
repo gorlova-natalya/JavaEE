@@ -1,7 +1,7 @@
 package com.teachmeskills.servlet;
 
+import com.teachmeskills.fasade.UserFacade;
 import com.teachmeskills.model.User;
-import com.teachmeskills.service.UserService;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,22 +14,22 @@ import java.util.List;
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
 
-    private UserService userService;
+    private UserFacade userFacade;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        userService = (UserService) config.getServletContext().getAttribute("userService");
+        userFacade = (UserFacade) config.getServletContext().getAttribute("userFacade");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String loginParameter = req.getParameter("login");
         if (loginParameter != null && !loginParameter.isEmpty()) {
-            List<User> users = userService.findUsersStartWith(loginParameter);
+            List<User> users = userFacade.findUsersStartWith(loginParameter);
             req.setAttribute("users", users);
         } else {
-            final List<User> users = userService.findUsers();
+            final List<User> users = userFacade.findUsers();
             req.setAttribute("users", users);
         }
         getServletContext().getRequestDispatcher("/main").forward(req, resp);

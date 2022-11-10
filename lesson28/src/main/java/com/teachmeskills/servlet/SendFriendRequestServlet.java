@@ -1,6 +1,6 @@
 package com.teachmeskills.servlet;
 
-import com.teachmeskills.service.FriendRequestService;
+import com.teachmeskills.fasade.FriendRequestFacade;
 import lombok.extern.slf4j.Slf4j;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,12 +14,12 @@ import java.io.IOException;
 @Slf4j
 public class SendFriendRequestServlet extends HttpServlet {
 
-    private FriendRequestService friendRequestService;
+    private FriendRequestFacade friendRequestFacade;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        friendRequestService = (FriendRequestService) config.getServletContext().getAttribute("friendRequestService");
+        friendRequestFacade = (FriendRequestFacade) config.getServletContext().getAttribute("friendRequestFacade");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class SendFriendRequestServlet extends HttpServlet {
         final long requestFrom = (long) req.getSession().getAttribute("loggedInUserId");
         log.info("Friend request has been sent to {}", requestTo);
         try {
-            friendRequestService.createRequest(requestFrom, requestTo);
+            friendRequestFacade.createRequest(requestFrom, requestTo);
         } catch (Exception ex) {
             log.error("не создан");
             resp.sendRedirect("users?error=" + ex.getMessage());

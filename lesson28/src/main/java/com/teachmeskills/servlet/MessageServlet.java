@@ -1,9 +1,9 @@
 package com.teachmeskills.servlet;
 
+import com.teachmeskills.fasade.MessageFacade;
 import com.teachmeskills.model.Message;
-import com.teachmeskills.service.MessageService;
-import com.teachmeskills.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,14 +17,12 @@ import java.util.List;
 @WebServlet("/sendMessage")
 public class MessageServlet extends HttpServlet {
 
-    private MessageService messageService;
-    private UserService userService;
+    private MessageFacade messageFacade;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        messageService = (MessageService) config.getServletContext().getAttribute("messageService");
-        userService = (UserService) config.getServletContext().getAttribute("userService");
+        messageFacade = (MessageFacade) config.getServletContext().getAttribute("messageFacade");
     }
 
     @Override
@@ -32,10 +30,10 @@ public class MessageServlet extends HttpServlet {
             throws ServletException, IOException {
         final long messageTo = Long.parseLong(request.getParameter("message_to"));
         final long messageFrom = (long) request.getSession().getAttribute("loggedInUserId");
-        List<Message> messages = messageService.getMessages(messageFrom, messageTo);
+        List<Message> messages = messageFacade.getMessages(messageFrom, messageTo);
         request.setAttribute("message_to", messageTo);
         request.setAttribute("messages", messages);
-        request.setAttribute("userName", userService.getUserById(messageTo).orElseThrow().getLogin());
+        request.setAttribute("userName", messageFacade.getUserById(messageTo).orElseThrow().getLogin());
         getServletContext().getRequestDispatcher("/dialog").forward(request, response);
     }
 
@@ -45,7 +43,7 @@ public class MessageServlet extends HttpServlet {
         final long messageFrom = (long) req.getSession().getAttribute("loggedInUserId");
         final String messageText = req.getParameter("message");
         try {
-            messageService.createMessage(messageFrom, messageTo, messageText);
+            messageFacade.createMessage(messageFrom, messageTo, messageText);
         } catch (Exception ex) {
             resp.sendRedirect("dialog?error=" + ex.getMessage());
             return;

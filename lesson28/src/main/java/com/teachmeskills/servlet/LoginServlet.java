@@ -1,7 +1,7 @@
 package com.teachmeskills.servlet;
 
+import com.teachmeskills.fasade.UserFacade;
 import com.teachmeskills.model.User;
-import com.teachmeskills.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,12 +17,12 @@ import java.util.Optional;
 @WebServlet("/loginUser")
 public class LoginServlet extends HttpServlet {
 
-    private UserService userService;
+    private UserFacade userFacade;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        userService = (UserService) config.getServletContext().getAttribute("userService");
+        userFacade = (UserFacade) config.getServletContext().getAttribute("userFacade");
     }
 
     @Override
@@ -37,10 +37,9 @@ public class LoginServlet extends HttpServlet {
 
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
-        String hashedPassword = userService.hashingPassword(password);
-//        final BCrypt.Result verify = userService.validatePassword(password, hashedPassword);
-        Optional<User> user = userService.getUser(login);
-        if (user.isPresent() && userService.validatePassword(password, hashedPassword)) {
+        String hashedPassword = userFacade.hashingPassword(password);
+        Optional<User> user = userFacade.getUser(login);
+        if (user.isPresent() && userFacade.validatePassword(password, hashedPassword)) {
             request.getSession().setAttribute("loggedInUserId", user.get().getId());
             log.info("User {} logged in", login);
             response.sendRedirect("users");

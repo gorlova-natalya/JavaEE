@@ -1,8 +1,9 @@
 package com.teachmeskills.servlet;
 
+import com.teachmeskills.fasade.FriendRequestFacade;
 import com.teachmeskills.model.User;
-import com.teachmeskills.service.FriendRequestService;
 import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,19 +17,18 @@ import java.util.List;
 @WebServlet("/outcomingFriendRequests")
 public class GetOutcomingFriendRequestServlet extends HttpServlet {
 
-    private FriendRequestService friendRequestService;
+    private FriendRequestFacade friendRequestFacade;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        friendRequestService = (FriendRequestService) config.getServletContext()
-                .getAttribute("friendRequestService");
+        friendRequestFacade = (FriendRequestFacade) config.getServletContext().getAttribute("friendRequestFacade");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final long requestFrom = (long) req.getSession().getAttribute("loggedInUserId");
-        List<User> users = friendRequestService.getUsersByOutcomingRequests(requestFrom);
+        List<User> users = friendRequestFacade.getUsersByOutcomingRequests(requestFrom);
         req.setAttribute("outcomingRequests", users);
         getServletContext().getRequestDispatcher("/outcomingRequests").forward(req, resp);
     }

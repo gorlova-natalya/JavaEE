@@ -1,5 +1,9 @@
 package com.teachmeskills.listener;
 
+import com.teachmeskills.fasade.FriendFacade;
+import com.teachmeskills.fasade.FriendRequestFacade;
+import com.teachmeskills.fasade.MessageFacade;
+import com.teachmeskills.fasade.UserFacade;
 import com.teachmeskills.properties.HashProperties;
 import com.teachmeskills.repository.BcryptHashPassword;
 import com.teachmeskills.repository.FriendRepository;
@@ -44,13 +48,18 @@ public class DependencyInitializationContextListener implements ServletContextLi
             UserService userService = new UserService(repository, hashPassword);
             FriendRequestRepository friendRequestRepository = new JdbcFriendRequestRepository(con);
             FriendRequestService requestService =
-                    new FriendRequestService(friendRequestRepository, friendRepository, userService);
+                    new FriendRequestService(friendRequestRepository, friendRepository);
             FriendService friendService = new FriendService(friendRepository);
             MessageService messageService = new MessageService(messageRepository);
-            sce.getServletContext().setAttribute("userService", userService);
-            sce.getServletContext().setAttribute("friendRequestService", requestService);
-            sce.getServletContext().setAttribute("friendService", friendService);
-            sce.getServletContext().setAttribute("messageService", messageService);
+            UserFacade userFacade = new UserFacade(userService);
+            FriendFacade friendFacade = new FriendFacade(friendService, userService, messageService);
+            FriendRequestFacade friendRequestFacade =
+                    new FriendRequestFacade(requestService, friendRequestRepository, userService);
+            MessageFacade messageFacade = new MessageFacade(messageService, userService);
+            sce.getServletContext().setAttribute("userFacade", userFacade);
+            sce.getServletContext().setAttribute("friendFacade", friendFacade);
+            sce.getServletContext().setAttribute("friendRequestFacade", friendRequestFacade);
+            sce.getServletContext().setAttribute("messageFacade", messageFacade);
         } catch (Exception e) {
             log.error("Unable to establish connection with database");
             throw new RuntimeException(e + "Unable to establish connection with database");
