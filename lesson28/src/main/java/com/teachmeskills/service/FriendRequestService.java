@@ -1,9 +1,11 @@
 package com.teachmeskills.service;
 
+import com.teachmeskills.model.FriendRequest;
 import com.teachmeskills.repository.FriendRepository;
 import com.teachmeskills.repository.FriendRequestRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 @Slf4j
 @AllArgsConstructor
@@ -34,5 +36,13 @@ public class FriendRequestService {
             throw new RuntimeException("Request not exist");
         }
         friendRequestRepository.deleteRequest(requestFrom, requestTo);
+    }
+
+    public List<FriendRequest> getOutcomingRequests(long inviterId) {
+        return friendRequestRepository.getOutcomingRequests(inviterId);
+    }
+
+    public List<FriendRequest> getIncomingRequests(long userId) {
+        return friendRequestRepository.getIncomingRequests(userId);
     }
 }

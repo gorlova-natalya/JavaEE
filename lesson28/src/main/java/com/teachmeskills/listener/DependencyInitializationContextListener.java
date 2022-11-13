@@ -54,7 +54,7 @@ public class DependencyInitializationContextListener implements ServletContextLi
             UserFacade userFacade = new UserFacade(userService);
             FriendFacade friendFacade = new FriendFacade(friendService, userService, messageService);
             FriendRequestFacade friendRequestFacade =
-                    new FriendRequestFacade(requestService, friendRequestRepository, userService);
+                    new FriendRequestFacade(requestService, userService);
             MessageFacade messageFacade = new MessageFacade(messageService, userService);
             sce.getServletContext().setAttribute("userFacade", userFacade);
             sce.getServletContext().setAttribute("friendFacade", friendFacade);
