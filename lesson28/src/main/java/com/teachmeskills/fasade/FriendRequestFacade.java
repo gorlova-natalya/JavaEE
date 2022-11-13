@@ -5,6 +5,7 @@ import com.teachmeskills.model.User;
 import com.teachmeskills.service.FriendRequestService;
 import com.teachmeskills.service.UserService;
 import lombok.AllArgsConstructor;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class FriendRequestFacade {
 
     private final FriendRequestService friendRequestService;
-     private final UserService userService;
+    private final UserService userService;
 
     public void createRequest(long requestFrom, long requestTo) {
         friendRequestService.createRequest(requestFrom, requestTo);
