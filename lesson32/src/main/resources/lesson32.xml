@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
@@ -24,7 +25,11 @@
         <constructor-arg index="0" ref="connection"/>
     </bean>
 
+
+    <context:property-placeholder location="classpath*:app.properties" />
+
     <bean id="hashProperties" class="com.teachmeskills.properties.HashProperties">
+        <constructor-arg index="0" value="${hashSecret}"/>
     </bean>
 
     <bean id="hashPassword" class="com.teachmeskills.repository.BcryptHashPassword">
@@ -53,24 +58,24 @@
         <constructor-arg index="0" ref="messageRepository"/>
     </bean>
 
-    <bean id="userFacade" class="com.teachmeskills.fasade.UserFacade">
+    <bean id="userFacade" class="com.teachmeskills.facade.UserFacade">
         <constructor-arg index="0" ref="userService"/>
     </bean>
 
-    <bean id="friendFacade" class="com.teachmeskills.fasade.FriendFacade">
+    <bean id="friendFacade" class="com.teachmeskills.facade.FriendFacade">
         <constructor-arg index="0" ref="friendService"/>
         <constructor-arg index="1" ref="userService"/>
         <constructor-arg index="2" ref="messageService"/>
     </bean>
 
-    <bean id="friendRequestFacade" class="com.teachmeskills.fasade.FriendRequestFacade">
+    <bean id="friendRequestFacade" class="com.teachmeskills.facade.FriendRequestFacade">
         <constructor-arg index="0" ref="requestService"/>
         <constructor-arg index="1" ref="friendRequestRepository"/>
         <constructor-arg index="2" ref="userService"/>
     </bean>
 
-    <bean id="messageFacade" class="com.teachmeskills.fasade.MessageFacade">
+    <bean id="messageFacade" class="com.teachmeskills.facade.MessageFacade">
         <constructor-arg index="0" ref="messageService"/>
-        <constructor-arg index="1" ref="userService"/>
     </bean>
+
 </beans>

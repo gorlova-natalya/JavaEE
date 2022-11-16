@@ -26,6 +26,6 @@ public class MessageService {
     }
 
     public void deleteDialog(long requestFrom, long requestTo) {
-        messageRepository.deleteDialog(requestFrom, requestTo);
+        messageRepository.deleteMessages(requestFrom, requestTo);
     }
 }

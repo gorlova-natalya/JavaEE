@@ -2,6 +2,7 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.Friend;
 import lombok.extern.slf4j.Slf4j;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,11 @@ import java.util.Optional;
 @Slf4j
 public class JdbcFriendRepository implements FriendRepository {
     private final Connection connection;
+    private static final String ADD_FRIEND_SQL = "insert into friends (user_id, friend_id) values (?, ?)";
+    private static final String GET_FRIEND_SQL =
+            "select user_id, friend_id from friends where user_id = ? and friend_id = ?";
+    private static final String GET_USER_FRIENDS = "select user_id, friend_id from friends where user_id = ?";
+    private static final String DELETE_FRIEND_SQL = "delete from friends where user_id = ? and friend_id = ?";
 
     public JdbcFriendRepository(Connection connection) {
         this.connection = connection;
@@ -21,8 +27,7 @@ public class JdbcFriendRepository implements FriendRepository {
 
     @Override
     public void addFriend(long requestFrom, long requestTo) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "insert into friends (user_id, friend_id) values (?, ?)")) {
+        try (PreparedStatement statement = connection.prepareStatement(ADD_FRIEND_SQL)) {
             statement.setLong(1, requestFrom);
             statement.setLong(2, requestTo);
             statement.execute();
@@ -36,8 +41,7 @@ public class JdbcFriendRepository implements FriendRepository {
 
     @Override
     public Optional<Friend> getFriend(long requestFrom, long requestTo) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "select user_id, friend_id from friends where user_id = ? and friend_id = ?")) {
+        try (PreparedStatement statement = connection.prepareStatement(GET_FRIEND_SQL)) {
             statement.setLong(1, requestFrom);
             statement.setLong(2, requestTo);
             ResultSet rs = statement.executeQuery();
@@ -59,8 +63,7 @@ public class JdbcFriendRepository implements FriendRepository {
 
     @Override
     public List<Friend> getUserFriends(long userId) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "select user_id, friend_id from friends where user_id = ?")) {
+        try (PreparedStatement statement = connection.prepareStatement(GET_USER_FRIENDS)) {
             statement.setLong(1, userId);
             ResultSet rs = statement.executeQuery();
             final List<Friend> friends = new ArrayList<>();
@@ -76,8 +79,7 @@ public class JdbcFriendRepository implements FriendRepository {
 
     @Override
     public void deleteFriend(long requestFrom, long requestTo) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "delete from friends where user_id = ? and friend_id = ?")) {
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_FRIEND_SQL)) {
             statement.setLong(1, requestFrom);
             statement.setLong(2, requestTo);
             statement.execute();

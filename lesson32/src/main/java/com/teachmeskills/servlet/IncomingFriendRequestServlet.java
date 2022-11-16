@@ -1,6 +1,6 @@
 package com.teachmeskills.servlet;
 
-import com.teachmeskills.fasade.FriendRequestFacade;
+import com.teachmeskills.facade.FriendRequestFacade;
 import com.teachmeskills.model.User;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,13 +29,13 @@ public class IncomingFriendRequestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final long requestTo = (long) req.getSession().getAttribute("loggedInUserId");
         List<User> users = friendRequestFacade.getUsersByIncomingRequests(requestTo);
-        req.setAttribute("incomingRequests", users);
+        req.setAttribute("usersIR", users);
         getServletContext().getRequestDispatcher("/incomingRequests").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final long requestFrom = Long.parseLong(req.getParameter("accept_fr"));
+        final long requestFrom = Long.parseLong(req.getParameter("acceptFr"));
         final long requestTo = (long) req.getSession().getAttribute("loggedInUserId");
         try {
             friendRequestFacade.acceptRequest(requestFrom, requestTo);

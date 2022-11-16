@@ -34,7 +34,7 @@
                                 </td>
                                 <td  class="col-1">
                                     <form action="sendMessage" method="get">
-                                        <input type="hidden" name="message_to" value="${user.id}"/>
+                                        <input type="hidden" name="messageTo" value="${user.id}"/>
                                         <button type="submit" class="btn btn-primary" name="button">Dialog</button>
                                     </form>
                                 </td>

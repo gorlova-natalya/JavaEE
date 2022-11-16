@@ -32,7 +32,7 @@
                                                   placeholder="Write message"></textarea>
                                     </div>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <input type="hidden" name="message_to" value="${message_to}"/>
+                                        <input type="hidden" name="messageTo" value="${messageTo}"/>
                                         <button type="submit" class="btn btn-primary mb-2 pull-right">Send</button>
                                     </div>
                                 </form>

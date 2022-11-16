@@ -10,5 +10,5 @@ public interface MessageRepository {
 
     List<Message> getMessages(long messageFrom, long messageTo);
 
-    void deleteDialog(long requestFrom, long requestTo);
+    void deleteMessages(long requestFrom, long requestTo);
 }

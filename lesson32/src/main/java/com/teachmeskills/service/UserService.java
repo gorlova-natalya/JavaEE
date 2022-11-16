@@ -4,6 +4,7 @@ import com.teachmeskills.model.User;
 import com.teachmeskills.repository.HashPassword;
 import com.teachmeskills.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +54,9 @@ public class UserService {
 
     public List<User> findUsersStartWith(String login) {
         return userRepository.findUsersStartWith(login);
+    }
+
+    public List<User> getUsersById(List<Long> usersId) {
+        return userRepository.getUsersById(usersId);
     }
 }

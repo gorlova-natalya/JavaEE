@@ -1,6 +1,6 @@
 package com.teachmeskills.servlet;
 
-import com.teachmeskills.fasade.UserFacade;
+import com.teachmeskills.facade.UserFacade;
 import com.teachmeskills.model.User;
 import lombok.extern.slf4j.Slf4j;
 import javax.servlet.ServletConfig;

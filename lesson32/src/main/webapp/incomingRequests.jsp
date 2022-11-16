@@ -25,7 +25,7 @@
                             <th>Decline request</th>
                         </tr>
                         <tbody>
-                        <c:forEach items="${incomingRequests}" var="user">
+                        <c:forEach items="${usersIR}" var="user">
                             <tr>
                                 <td>
                                     <c:out value="${user.login}"/>
@@ -35,13 +35,13 @@
                                 </td>
                                 <td>
                                     <form action="incomingFriendRequests" method="post">
-                                        <input type="hidden" name="accept_fr" value="${user.id}"/>
+                                        <input type="hidden" name="acceptFr" value="${user.id}"/>
                                         <button type="submit" class="btn btn-primary" name="button">Accept</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="deleteFriendRequest" method="post">
-                                        <input type="hidden" name="revoke_fr" value="${user.id}"/>
+                                        <input type="hidden" name="revokeFr" value="${user.id}"/>
                                         <input type="hidden" name="redirect" value="incomingFriendRequests"/>
                                         <button type="submit" class="btn btn-primary" name="button">Decline</button>
                                     </form>

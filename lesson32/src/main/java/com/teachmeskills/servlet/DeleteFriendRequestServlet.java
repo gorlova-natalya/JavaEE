@@ -1,6 +1,6 @@
 package com.teachmeskills.servlet;
 
-import com.teachmeskills.fasade.FriendRequestFacade;
+import com.teachmeskills.facade.FriendRequestFacade;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +23,7 @@ public class DeleteFriendRequestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final long requestFrom = (long) req.getSession().getAttribute("loggedInUserId");
-        final long requestTo = Long.parseLong(req.getParameter("revoke_fr"));
+        final long requestTo = Long.parseLong(req.getParameter("revokeFr"));
         friendRequestFacade.deleteRequest(requestFrom, requestTo);
         resp.sendRedirect(req.getParameter("redirect"));
     }

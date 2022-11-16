@@ -1,4 +1,4 @@
-package com.teachmeskills.fasade;
+package com.teachmeskills.facade;
 
 import com.teachmeskills.model.Friend;
 import com.teachmeskills.model.User;
@@ -8,7 +8,6 @@ import com.teachmeskills.service.UserService;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -19,12 +18,9 @@ public class FriendFacade {
     private final MessageService messageService;
 
     public List<User> getFriends(long userId) {
-        return  friendService.getUserFriends(userId).stream()
-                .map(Friend::getFriendId)
-                .map(userService::getUserById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
+        List<Long> friendsId = friendService.getUserFriends(userId).stream()
+                .map(Friend::getFriendId).collect(Collectors.toList());
+        return userService.getUsersById(friendsId);
     }
 
     public void deleteFriendAndDialog(long requestFrom, long requestTo) {

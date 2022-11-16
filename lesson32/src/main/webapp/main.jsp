@@ -37,7 +37,7 @@
                                 <td>
                                     <c:if test="${loggedUserId != user.id}">
                                         <form action="addFriend" method="post">
-                                            <input type="hidden" name="send_fr" value="${user.id}"/>
+                                            <input type="hidden" name="sendFr" value="${user.id}"/>
                                             <button type="submit" class="btn btn-primary" name="button">Add friend
                                             </button>
                                         </form>

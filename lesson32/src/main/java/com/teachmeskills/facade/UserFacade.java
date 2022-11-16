@@ -1,4 +1,4 @@
-package com.teachmeskills.fasade;
+package com.teachmeskills.facade;
 
 import com.teachmeskills.model.User;
 import com.teachmeskills.service.UserService;
@@ -15,7 +15,6 @@ public class UserFacade {
     public List<User> findUsers() {
         return userService.findUsers();
     }
-
 
     public String hashingPassword(String password) {
         return userService.hashingPassword(password);
@@ -35,5 +34,9 @@ public class UserFacade {
 
     public List<User> findUsersStartWith(String login) {
         return userService.findUsersStartWith(login);
+    }
+
+    public Optional<User> getUserById(long userId) {
+        return userService.getUserById(userId);
     }
 }

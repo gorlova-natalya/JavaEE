@@ -2,6 +2,7 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.Message;
 import lombok.extern.slf4j.Slf4j;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,11 @@ import java.util.List;
 public class JdbcMessageRepository implements MessageRepository {
 
     private final Connection connection;
+    private static final String CREATE_MESSAGES_SQL =
+            "insert into messages (user_id, friend_id, message) values (?, ?, ?)";
+    private static final String GET_MESSAGES_SQL =
+            "select * from messages where user_id = ? and friend_id = ? order by created_at DESC ";
+    private static final String DELETE_MESSAGES_SQL = "delete from messages where user_id = ? and friend_id = ?";
 
     public JdbcMessageRepository(Connection connection) {
         this.connection = connection;
@@ -21,8 +27,7 @@ public class JdbcMessageRepository implements MessageRepository {
 
     @Override
     public void createMessage(long messageFrom, long messageTo, String messageText) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "insert into messages (user_id, friend_id, message) values (?, ?, ?)")) {
+        try (PreparedStatement statement = connection.prepareStatement(CREATE_MESSAGES_SQL)) {
             statement.setLong(1, messageFrom);
             statement.setLong(2, messageTo);
             statement.setString(3, messageText);
@@ -36,8 +41,7 @@ public class JdbcMessageRepository implements MessageRepository {
 
     @Override
     public List<Message> getMessages(long messageFrom, long messageTo) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "select * from messages where user_id = ? and friend_id = ? order by created_at DESC ")) {
+        try (PreparedStatement statement = connection.prepareStatement(GET_MESSAGES_SQL)) {
             final List<Message> messages = new ArrayList<>();
             statement.setLong(1, messageFrom);
             statement.setLong(2, messageTo);
@@ -68,9 +72,8 @@ public class JdbcMessageRepository implements MessageRepository {
     }
 
     @Override
-    public void deleteDialog(long requestFrom, long requestTo) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "delete from messages where user_id = ? and friend_id = ?")) {
+    public void deleteMessages(long requestFrom, long requestTo) {
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_MESSAGES_SQL)) {
             statement.setLong(1, requestFrom);
             statement.setLong(2, requestTo);
             statement.execute();

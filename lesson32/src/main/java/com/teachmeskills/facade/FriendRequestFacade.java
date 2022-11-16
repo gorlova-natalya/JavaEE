@@ -1,4 +1,4 @@
-package com.teachmeskills.fasade;
+package com.teachmeskills.facade;
 
 import com.teachmeskills.model.FriendRequest;
 import com.teachmeskills.model.User;

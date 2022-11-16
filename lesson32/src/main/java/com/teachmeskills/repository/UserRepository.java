@@ -15,4 +15,6 @@ public interface UserRepository {
     List<User> findUsersStartWith(String login);
 
     Optional<User> getUserById(long userId);
+
+    List<User> getUsersById(List<Long> usersId);
 }

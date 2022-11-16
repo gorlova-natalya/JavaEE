@@ -1,9 +1,9 @@
 package com.teachmeskills.listener;
 
-import com.teachmeskills.fasade.FriendFacade;
-import com.teachmeskills.fasade.FriendRequestFacade;
-import com.teachmeskills.fasade.MessageFacade;
-import com.teachmeskills.fasade.UserFacade;
+import com.teachmeskills.facade.FriendFacade;
+import com.teachmeskills.facade.FriendRequestFacade;
+import com.teachmeskills.facade.MessageFacade;
+import com.teachmeskills.facade.UserFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

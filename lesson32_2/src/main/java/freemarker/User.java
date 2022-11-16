@@ -1,17 +1,13 @@
 package freemarker;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 @Builder
 public class User {
-    private Long id;
-    private String name;
-    private Integer age;
-    private String email;
+    Long id;
+    String name;
+    Integer age;
+    String email;
 }

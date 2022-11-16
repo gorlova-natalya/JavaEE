@@ -1,6 +1,6 @@
 package com.teachmeskills.servlet;
 
-import com.teachmeskills.fasade.FriendFacade;
+import com.teachmeskills.facade.FriendFacade;
 import com.teachmeskills.model.User;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
