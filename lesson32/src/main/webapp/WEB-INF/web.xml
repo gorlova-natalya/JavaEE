@@ -5,18 +5,18 @@
 http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		 version="2.4">
 
-	<context-param>
-		<param-name>db_url</param-name>
-		<param-value>jdbc:postgresql://demo-postgres:5432/postgres</param-value>
-	</context-param>
-	<context-param>
-		<param-name>db_user</param-name>
-		<param-value>postgres</param-value>
-	</context-param>
-	<context-param>
-		<param-name>db_password</param-name>
-		<param-value>postgres</param-value>
-	</context-param>
+<!--	<context-param>-->
+<!--		<param-name>db_url</param-name>-->
+<!--		<param-value>jdbc:postgresql://demo-postgres:5432/postgres</param-value>-->
+<!--	</context-param>-->
+<!--	<context-param>-->
+<!--		<param-name>db_user</param-name>-->
+<!--		<param-value>postgres</param-value>-->
+<!--	</context-param>-->
+<!--	<context-param>-->
+<!--		<param-name>db_password</param-name>-->
+<!--		<param-value>postgres</param-value>-->
+<!--	</context-param>-->
 
 	<servlet>
 		<servlet-name>Main</servlet-name>
@@ -86,5 +86,15 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	<servlet-mapping>
 		<servlet-name>Dialog</servlet-name>
 		<url-pattern>/dialog</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>
