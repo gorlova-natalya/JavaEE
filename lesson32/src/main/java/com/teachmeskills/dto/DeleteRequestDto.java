@@ -7,5 +7,4 @@ public class DeleteRequestDto {
 
     private final String revokeFr;
     private final String redirect;
-
 }

@@ -2,11 +2,13 @@ package com.teachmeskills.service;
 
 import com.teachmeskills.model.Message;
 import com.teachmeskills.repository.MessageRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Service
 public class MessageService {
 
     private final MessageRepository messageRepository;

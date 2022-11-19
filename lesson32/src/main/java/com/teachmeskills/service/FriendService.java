@@ -2,8 +2,11 @@ package com.teachmeskills.service;
 
 import com.teachmeskills.model.Friend;
 import com.teachmeskills.repository.FriendRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class FriendService {
 
     private final FriendRepository friendRepository;

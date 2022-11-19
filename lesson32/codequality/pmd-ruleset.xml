@@ -8,18 +8,18 @@
 
     <rule ref="category/java/bestpractices.xml/AvoidUsingHardCodedIP"/>
     <rule ref="category/java/bestpractices.xml/CheckResultSet"/>
-<!--    <rule ref="category/java/bestpractices.xml/UnusedImports"/>-->
+    <rule ref="category/java/bestpractices.xml/UnusedImports"/>
     <rule ref="category/java/bestpractices.xml/UnusedFormalParameter"/>
     <rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
     <rule ref="category/java/bestpractices.xml/UnusedPrivateField"/>
     <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod"/>
     <rule ref="category/java/bestpractices.xml/OneDeclarationPerLine"/>
-    <rule ref="category/java/bestpractices.xml/UnusedAssignment">
-        <properties>
-            <property name="checkUnusedPrefixIncrement" value="false" />
-            <property name="reportUnusedVariables" value="true" />
-        </properties>
-    </rule>
+<!--    <rule ref="category/java/bestpractices.xml/UnusedAssignment">-->
+<!--        <properties>-->
+<!--            <property name="checkUnusedPrefixIncrement" value="false" />-->
+<!--            <property name="reportUnusedVariables" value="true" />-->
+<!--        </properties>-->
+<!--    </rule>-->
     <rule ref="category/java/bestpractices.xml/UseTryWithResources"/>
 
     <rule ref="category/java/codestyle.xml/ExtendsObject"/>

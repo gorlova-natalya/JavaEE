@@ -17,11 +17,11 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MappedInterceptor(new String[]{"/examples"}, new AuthInterceptor(authContext)));
+        registry.addInterceptor(new MappedInterceptor(new String[]{"/loginUser"}, new AuthInterceptor(authContext)));
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/examples").setViewName("examples");
+        registry.addViewController("/login").setViewName("login");
     }
 }
