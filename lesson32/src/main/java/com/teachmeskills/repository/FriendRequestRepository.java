@@ -1,9 +1,12 @@
 package com.teachmeskills.repository;
 
 import com.teachmeskills.model.FriendRequest;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface FriendRequestRepository {
 
     Optional<FriendRequest> getRequest(long requestFrom, long requestTo);

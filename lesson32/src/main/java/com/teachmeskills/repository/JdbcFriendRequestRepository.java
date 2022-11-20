@@ -2,6 +2,7 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.FriendRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 @Slf4j
 public class JdbcFriendRequestRepository implements FriendRequestRepository {
 

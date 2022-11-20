@@ -6,10 +6,12 @@ import com.teachmeskills.service.FriendService;
 import com.teachmeskills.service.MessageService;
 import com.teachmeskills.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 @AllArgsConstructor
 public class FriendFacade {
 

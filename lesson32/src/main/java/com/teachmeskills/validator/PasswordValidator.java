@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidatorContext;
 public class PasswordValidator implements ConstraintValidator<ValidUser, UserDto> {
     @Override
     public boolean isValid(UserDto dto, ConstraintValidatorContext context) {
-        if (dto.getPassword().equals(dto.getValidPassword())) {
+        if (dto.getPassword().equals(dto.getLogin())) {
             return true;
         }
         return false;

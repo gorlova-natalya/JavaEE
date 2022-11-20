@@ -2,6 +2,7 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import java.sql.PreparedStatement;
 import java.util.stream.Collectors;
 
+@Repository
 @Slf4j
 public class JdbcUserRepository implements UserRepository {
 

@@ -3,10 +3,12 @@ package com.teachmeskills.facade;
 import com.teachmeskills.model.User;
 import com.teachmeskills.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 @AllArgsConstructor
 public class UserFacade {
 

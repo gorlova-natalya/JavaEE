@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
+
 
 @Slf4j
 @Controller
@@ -22,7 +24,7 @@ public class RegistrationController {
     private final AuthContext authContext;
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    protected RedirectView createUser(final UserDto dto) {
+    protected RedirectView createUser(@Valid final UserDto dto) {
         final String hashedPassword = userFacade.hashingPassword(dto.getPassword());
         userFacade.createUser(dto.getLogin(), hashedPassword);
         authContext.setAuthorized(true);

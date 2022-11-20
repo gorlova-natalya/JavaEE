@@ -6,11 +6,13 @@ import com.teachmeskills.repository.FriendRequestRepository;
 import com.teachmeskills.service.FriendRequestService;
 import com.teachmeskills.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 @AllArgsConstructor
 public class FriendRequestFacade {
 

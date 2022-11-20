@@ -2,6 +2,7 @@ package com.teachmeskills.repository;
 
 import com.teachmeskills.model.Message;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Repository
 @Slf4j
 public class JdbcMessageRepository implements MessageRepository {
 

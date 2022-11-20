@@ -3,11 +3,13 @@ package com.teachmeskills.repository;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.teachmeskills.properties.HashProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 
+@Repository
 @RequiredArgsConstructor
 public class BcryptHashPassword implements HashPassword {
 

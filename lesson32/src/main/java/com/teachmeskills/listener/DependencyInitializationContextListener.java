@@ -7,12 +7,15 @@ import com.teachmeskills.facade.UserFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
 @Slf4j
+@Component
 public class DependencyInitializationContextListener implements ServletContextListener {
 
     @Override
