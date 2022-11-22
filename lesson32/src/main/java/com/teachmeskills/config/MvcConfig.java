@@ -33,6 +33,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/reg").setViewName("reg");
         registry.addViewController("/users").setViewName("menu");
+        registry.addViewController("/accessDenied").setViewName("accessDenied");
     }
 
     @Bean

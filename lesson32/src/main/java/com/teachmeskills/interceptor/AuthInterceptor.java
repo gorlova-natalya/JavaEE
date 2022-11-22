@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.HandlerInterceptor;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,11 +21,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (authContext.isAuthorized()) {
             return true;
         }
-        log.info("ошибка1");
-        if (!request.getRequestURI().contains("accessDenied")) {
-            response.sendRedirect("accessDenied");
-            log.info("ошибка");
-        }
+        response.sendRedirect("accessDenied");
         return false;
     }
 }
