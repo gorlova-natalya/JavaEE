@@ -14,7 +14,6 @@ public class FriendRequestService {
     private final FriendRequestRepository friendRequestRepository;
     private final FriendRepository friendRepository;
 
-
     public void createRequest(long requestFrom, long requestTo) {
         if (friendRequestRepository.getRequest(requestFrom, requestTo).isPresent() ||
                 friendRequestRepository.getRequest(requestTo, requestFrom).isPresent()) {

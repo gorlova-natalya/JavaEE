@@ -1,6 +1,5 @@
 package com.teachmeskills.controller;
 
-import com.teachmeskills.dto.IncomingRequestDto;
 import com.teachmeskills.facade.FriendRequestFacade;
 import com.teachmeskills.model.User;
 import com.teachmeskills.session.AuthContext;
@@ -9,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
-
 import java.util.List;
 
 @Slf4j
@@ -33,12 +32,18 @@ public class IncomingFriendRequestController {
         return "incomingRequests";
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    protected RedirectView acceptFriendRequest(final IncomingRequestDto dto) {
-        final long requestFrom = dto.getAcceptFr();
+    @PostMapping(path = "/{friendId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    protected String acceptFriendRequest(@PathVariable("friendId") Long requestFrom) {
         final long requestTo = authContext.getLoggedInUserId();
         friendRequestFacade.acceptRequest(requestFrom, requestTo);
         log.info("Friend request has been accepted from {}", requestFrom);
-        return new RedirectView("incomingFriendRequests");
+        return "redirect:/incomingFriendRequests";
+    }
+
+    @DeleteMapping("/{friendId}")
+    protected String deleteFriendRequest(@PathVariable("friendId") Long requestFrom) {
+        final long requestTo = authContext.getLoggedInUserId();
+        friendRequestFacade.deleteRequest(requestFrom, requestTo);
+        return "redirect:/incomingFriendRequests";
     }
 }

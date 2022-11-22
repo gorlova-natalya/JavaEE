@@ -8,8 +8,8 @@ import javax.validation.constraints.NotEmpty;
 public class UserDto {
 
     @NotEmpty(message = "Login must not be empty")
-    private final String login;
+    private String login;
 
     @NotEmpty(message = "Password must not be empty")
-    private final String password;
+    private String password;
 }

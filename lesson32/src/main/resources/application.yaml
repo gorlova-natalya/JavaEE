@@ -4,6 +4,12 @@ spring:
     username: postgres
     password: postgres
     url: jdbc:postgresql://localhost:35432/postgres
+  mvc:
+    hiddenmethod:
+       filter:
+         enabled: true
+
+hashSecret: SECRET
 
 management:
   endpoints:

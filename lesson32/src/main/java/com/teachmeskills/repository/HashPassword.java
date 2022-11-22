@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 public interface HashPassword {
 
     String hashingPassword(String password);
+
     boolean validatePassword(String password, String hashedPassword);
 }

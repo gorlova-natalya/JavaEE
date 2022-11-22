@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.List;
 
 @Controller
@@ -17,14 +18,17 @@ public class UserController {
 
     private final UserFacade userFacade;
 
-    @GetMapping("/users/{login}")
-    protected String getUsers(Model model, @PathVariable("login") String login) {
-        String loginParameter = String.valueOf(model.getAttribute(login));
-        if (loginParameter != null && !loginParameter.isEmpty()) {
-            List<User> users = userFacade.findUsersStartWith(loginParameter);
-            model.addAttribute("users", users);
-        } else {
-            final List<User> users = userFacade.findUsers();
+    @GetMapping()
+    protected String getUsers(Model model) {
+        final List<User> users = userFacade.findUsers();
+        model.addAttribute("users", users);
+        return "main";
+    }
+
+    @GetMapping("/{login}")
+    protected String getUsersByLogin(Model model, @PathVariable("login") String login) {
+        if (login != null && !login.isEmpty()) {
+            List<User> users = userFacade.findUsersStartWith(login);
             model.addAttribute("users", users);
         }
         return "main";

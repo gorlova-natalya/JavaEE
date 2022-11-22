@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
-
 @Repository
 @RequiredArgsConstructor
 public class BcryptHashPassword implements HashPassword {

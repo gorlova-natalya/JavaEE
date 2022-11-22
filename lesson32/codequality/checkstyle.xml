@@ -39,6 +39,11 @@
         </module>
 
         <!-- Formatting -->
+        <module name="EmptyLineSeparator">
+            <property name="allowMultipleEmptyLines" value="false"/>
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
+        </module>
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter"/>
         <module name="NoWhitespaceBefore"/>
@@ -142,7 +147,7 @@
         </module>
         <module name="MultipleVariableDeclarations"/>
         <module name="InnerTypeLast"/>
-        <module name="HideUtilityClassConstructor"/>
+<!--        <module name="HideUtilityClassConstructor"/>-->
         <module name="MutableException"/>
         <module name="OneStatementPerLine"/>
     </module>

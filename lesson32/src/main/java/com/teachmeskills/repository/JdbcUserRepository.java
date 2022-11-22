@@ -27,11 +27,9 @@ public class JdbcUserRepository implements UserRepository {
             "select id, login, password from users where login like concat('%', ?, '%')";
     private static final String GET_USER_BY_ID_SQL = "select id, login, password from users where id = ?";
 
-
     public JdbcUserRepository(Connection connection) {
         this.connection = connection;
     }
-
 
     @Override
     public List<User> findUsers() {

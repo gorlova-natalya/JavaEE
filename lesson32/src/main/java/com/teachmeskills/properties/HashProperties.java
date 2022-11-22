@@ -1,14 +1,15 @@
 package com.teachmeskills.properties;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@Getter
+@Setter
 public class HashProperties {
 
-    private final String secret;
-
-    public HashProperties(String secret) {
-        this.secret = secret;
-    }
-
-    public String getSecret() {
-        return secret;
-    }
+    @Value("${hashSecret}")
+    private String secret;
 }

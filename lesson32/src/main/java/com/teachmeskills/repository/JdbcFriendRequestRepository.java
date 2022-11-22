@@ -26,7 +26,6 @@ public class JdbcFriendRequestRepository implements FriendRequestRepository {
     private static final String GET_OUTCOMING_REQUESTS_SQL =
             "select inviter_id, user_id from invitations where inviter_id = ?";
 
-
     public JdbcFriendRequestRepository(Connection connection) {
         this.connection = connection;
     }
