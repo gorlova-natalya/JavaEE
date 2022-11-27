@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("/addFriend")
 @RequiredArgsConstructor
-public class SendFriendRequestController {
+public class FriendRequestController {
 
     private final FriendRequestFacade friendRequestFacade;
     private final AuthContext authContext;

@@ -132,7 +132,6 @@
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
         <module name="StringLiteralEquality"/>
-        <!--		<module name="SuperClone"/>-->
         <module name="SuperFinalize"/>
         <module name="ExplicitInitialization"/> <!-- May as well let Java do what its going to do -->
         <module name="DefaultComesLast"/>
@@ -147,7 +146,6 @@
         </module>
         <module name="MultipleVariableDeclarations"/>
         <module name="InnerTypeLast"/>
-<!--        <module name="HideUtilityClassConstructor"/>-->
         <module name="MutableException"/>
         <module name="OneStatementPerLine"/>
     </module>

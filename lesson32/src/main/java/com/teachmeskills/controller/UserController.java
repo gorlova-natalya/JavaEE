@@ -5,6 +5,7 @@ import com.teachmeskills.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class UserController {
 
     @GetMapping("/{login}")
     protected String getUsersByLogin(Model model, @PathVariable("login") String login) {
-        if (login != null && !login.isEmpty()) {
+        if (!StringUtils.isEmpty(login) && !StringUtils.isBlank(login)) {
             List<User> users = userFacade.findUsersStartWith(login);
             model.addAttribute("users", users);
         }

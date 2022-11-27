@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/outcomingFriendRequests")
 @RequiredArgsConstructor
-public class GetOutcomingFriendRequestController {
+public class OutcomingFriendRequestController {
 
     private final FriendRequestFacade friendRequestFacade;
     private final AuthContext authContext;

@@ -12,4 +12,7 @@ public class HashProperties {
 
     @Value("${hashSecret}")
     private String secret;
+
+    @Value("${complexity}")
+    private int complexity;
 }
