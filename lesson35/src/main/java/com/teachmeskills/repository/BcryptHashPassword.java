@@ -2,6 +2,7 @@ package com.teachmeskills.repository;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.teachmeskills.properties.HashProperties;
+import com.teachmeskills.service.HashPassword;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

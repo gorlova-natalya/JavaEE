@@ -18,7 +18,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
                              @NonNull Object handler) throws Exception {
-        if (authContext.isAuthorized()) {
+        if (authContext.getLoggedInUserId() != null) {
             return true;
         }
         response.sendRedirect("accessDenied");

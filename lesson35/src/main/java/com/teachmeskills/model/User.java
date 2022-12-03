@@ -7,6 +7,7 @@ import lombok.experimental.NonFinal;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,9 +37,9 @@ public class User {
         this.password = password;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "requestFrom")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "requestFrom")
     private List<FriendRequest> outcomingRequests;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "requestTo")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "requestTo")
     private List<FriendRequest> incomingRequests;
 }

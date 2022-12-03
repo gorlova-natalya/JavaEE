@@ -23,7 +23,6 @@ public class FriendRequestController {
     @PostMapping(path = "/{friendId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     protected RedirectView sendRequest(@PathVariable("friendId") Long friendId) {
         final long requestFrom = authContext.getLoggedInUserId();
-        log.info("Friend request has been sent to {}", friendId);
         friendRequestFacade.createRequest(requestFrom, friendId);
         log.info("Friend request has been sent to {}", friendId);
         return new RedirectView("/users");

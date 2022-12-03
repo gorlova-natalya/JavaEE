@@ -2,7 +2,6 @@ package com.teachmeskills.controller;
 
 import com.teachmeskills.dto.UserDto;
 import com.teachmeskills.facade.UserFacade;
-import com.teachmeskills.session.AuthContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -22,7 +21,6 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     private final UserFacade userFacade;
-    private final AuthContext authContext;
 
     @GetMapping
     protected String doGet(final Model model) {
@@ -32,9 +30,7 @@ public class RegistrationController {
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     protected String createUser(@Valid @ModelAttribute("dto") final UserDto dto) {
-        final String hashedPassword = userFacade.hashingPassword(dto.getPassword());
-        userFacade.createUser(dto.getLogin(), hashedPassword);
-        authContext.setAuthorized(true);
+        userFacade.createUser(dto.getLogin(), dto.getPassword());
         log.info("User {} registered", dto.getLogin());
         return "redirect:/registration";
     }

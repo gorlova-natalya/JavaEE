@@ -43,7 +43,6 @@ public class LoginController {
         if (user.isPresent() && userFacade.validatePassword(password, user.get().getPassword())) {
             authContext.setLoggedInUserId(user.get().getId());
             log.info("User {} logged in", login);
-            authContext.setAuthorized(true);
             return "redirect:/users";
         } else {
             PrintWriter out = response.getWriter();

@@ -1,9 +1,11 @@
 package com.teachmeskills.service;
 
 import com.teachmeskills.model.User;
-import com.teachmeskills.repository.HashPassword;
 import com.teachmeskills.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,9 @@ public class UserService {
         this.hashPassword = hashPassword;
     }
 
-    public List<User> findUsers() {
-        return userRepository.findAll();
+    public Page<User> findPaginatedUsers(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return userRepository.findAll(pageable);
     }
 
     public String hashingPassword(String password) {
@@ -42,7 +45,7 @@ public class UserService {
             log.info("User password is empty");
             throw new RuntimeException("User password is empty");
         }
-        final User user = new User(login, password);
+        final User user = new User(login, hashingPassword(password));
         userRepository.save(user);
         log.info("User with login {} successfully create", login);
     }

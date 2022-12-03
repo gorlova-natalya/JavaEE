@@ -31,7 +31,6 @@ public class MessageController {
     protected String getMessages(Model model, @PathVariable("friendId") Long messageTo) {
         final long messageFrom = authContext.getLoggedInUserId();
         List<Message> messages = messageFacade.getMessages(messageFrom, messageTo);
-        model.addAttribute("messageTo", messageTo);
         model.addAttribute("messages", messages);
         model.addAttribute("user", userFacade.getUserById(messageTo).orElseThrow());
         return "dialog";

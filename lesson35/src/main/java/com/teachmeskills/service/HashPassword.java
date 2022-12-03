@@ -1,4 +1,4 @@
-package com.teachmeskills.repository;
+package com.teachmeskills.service;
 
 public interface HashPassword {
 
