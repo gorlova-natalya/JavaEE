@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dialog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:insert="menu :: header"></div>
+<div class="container">
+    <div class="row" style="margin-top: 25px">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-text">
+                    <table class="table">
+                        <tr>
+                            <th>Message to <span th:text="${user.login}"/>
+                            </th>
+                            <th></th>
+                        </tr>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <form th:method="POST"
+                                      action="#"
+                                      th:action="@{/sendMessage/} + ${user.id}">
+                                    <div class="input-group">
+                                        <textarea class="form-control"
+                                                  aria-label="With textarea"
+                                                  name="message"
+                                                  placeholder="Write message"></textarea>
+                                    </div>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="submit" class="btn btn-primary mb-2 pull-right">Send</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-text">
+                    <table class='table table-borderless'>
+                        <tr>
+                            <th>Date</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                        <tbody>
+                        <th:block th:each="message : ${messages}">
+                            <div th:switch="${@authContext.getLoggedInUserId()}">
+                                <p th:case="${message.getMessageFrom()}">
+                                    <tr>
+                                        <td align="left" class="col">
+<!--                                            <span th:text="${message.createdAt}"></span>-->
+                                            <span th:text="${#temporals.format(message.createdAt, 'dd-MM-yyyy HH:mm')}"></span>
+                                        </td>
+                                        <td align="left" class="col-6">
+                                            <span th:text="${message.messageText}"></span>
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                </p>
+                                <p th:case="*">
+                                    <tr>
+                                        <td>
+
+                                        </td>
+                                        <td align="right" class="col-6">
+                                            <span th:text="${message.messageText}"></span>
+                                        </td>
+                                        <td align="right" class="col">
+<!--                                            <span th:text="${message.createdAt}"></span>-->
+                                            <span th:text="${#temporals.format(message.createdAt, 'dd-MM-yyyy HH:mm')}"></span>
+                                        </td>
+                                    </tr>
+                                </p>
+                            </div>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
