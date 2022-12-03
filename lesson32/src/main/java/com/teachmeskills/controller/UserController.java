@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/{login}")
     protected String getUsersByLogin(Model model, @PathVariable("login") String login) {
-        if (!StringUtils.isEmpty(login) && !StringUtils.isBlank(login)) {
+        if (StringUtils.isNotBlank(login)) {
             List<User> users = userFacade.findUsersStartWith(login);
             model.addAttribute("users", users);
         }
