@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -23,15 +22,14 @@ public class UserController {
     private final UserFacade userFacade;
 
     @GetMapping()
-    protected String getUsers(@RequestParam(name = "page", required = false) Integer pageNo,
-                              @RequestParam(name = "pageSize", required = false) Integer pageSize, Model model) {
-        Integer pageNumber = Optional.ofNullable(pageNo).orElse(1);
-        Integer size = Optional.ofNullable(pageSize).orElse(5);
-        final Page<User> page = userFacade.findPaginatedUsers(pageNumber, size);
+    protected String getUsers(@RequestParam(defaultValue = "1", name = "page", required = false) Integer pageNo,
+                              @RequestParam(defaultValue = "5", name = "pageSize", required = false) Integer pageSize,
+                              Model model) {
+        final Page<User> page = userFacade.findPaginatedUsers(pageNo, pageSize);
         List<User> listUsers = page.getContent();
         model.addAttribute("users", listUsers);
-        model.addAttribute("currentPage", pageNumber);
-        model.addAttribute("pageSize", size);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("pageSize", pageSize);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         return "main";
