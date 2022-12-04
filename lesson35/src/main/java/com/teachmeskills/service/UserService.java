@@ -28,7 +28,7 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public String hashingPassword(String password) {
+    private String hashingPassword(String password) {
         return hashPassword.hashingPassword(password);
     }
 
