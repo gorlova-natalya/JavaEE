@@ -22,4 +22,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     Optional<User> getUserById(long userId);
 
     List<User> findUsersByIdIn(List<Long> usersId);
+
+    User getUserByLoginAndPassword(String login, String password);
+
+    User findUserByLogin(String login);
 }

@@ -20,7 +20,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     private final AuthContext authContext;
     private static final List<String> ALLOWED_PATHS = List.of("/login", "/reg", "/loginUser", "/registration",
-            "/accessDenied", "/api/v1/users", "/api/v1/registration");
+            "/accessDenied", "/api/v1/users", "/api/v1/registration", "/api/v1/auth");
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

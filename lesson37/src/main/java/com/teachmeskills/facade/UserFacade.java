@@ -42,4 +42,12 @@ public class UserFacade {
     public Page<User> findPaginatedUsers(int pageNo, int pageSize) {
         return userService.findPaginatedUsers(pageNo, pageSize);
     }
+
+    public User getUserByLoginAndPassword(String login, String password) {
+        return userService.getUserByLoginAndPassword(login, password);
+    }
+
+    public User getUserByLogin(String login) {
+        return userService.getUserByLogin(login);
+    }
 }

@@ -9,10 +9,9 @@ import javax.validation.constraints.NotEmpty;
 @ValidUser
 public class AuthUserDto {
 
-        @NotEmpty(message = "Login cannot be empty")
-        private String login;
-        @NotEmpty(message = "Password cannot be empty")
-        private String password;
-        private String confirmationPassword;
-
+    @NotEmpty(message = "Login cannot be empty")
+    private String login;
+    @NotEmpty(message = "Password cannot be empty")
+    private String password;
+    private String confirmationPassword;
 }

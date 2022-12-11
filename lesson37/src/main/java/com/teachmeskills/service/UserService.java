@@ -67,4 +67,12 @@ public class UserService {
     public List<User> getUsersById(List<Long> usersId) {
         return userRepository.findUsersByIdIn(usersId);
     }
+
+    public User getUserByLogin(String login) {
+        return userRepository.findUserByLogin(login);
+    }
+
+    public User getUserByLoginAndPassword(String login, String password) {
+        return userRepository.getUserByLoginAndPassword(login, password);
+    }
 }
