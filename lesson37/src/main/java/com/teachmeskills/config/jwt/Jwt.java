@@ -10,9 +10,8 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Slf4j
@@ -23,10 +22,9 @@ public class Jwt {
     private String jwtSecret;
 
     public String generateToken(String login) {
-        Date date = Date.from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .setSubject(login)
-                .setExpiration(date)
+                .setExpiration(Date.from(Instant.now().plus(15, ChronoUnit.MINUTES)))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

@@ -1,9 +1,12 @@
 package com.teachmeskills.config;
 
 import com.teachmeskills.config.filter.JwtFilter;
+import com.teachmeskills.session.AuthContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
@@ -27,12 +30,12 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().formLogin()
+                .and().authorizeRequests()
+                .antMatchers("/*", "/api/v1/auth").permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers("/registration", "/login").permitAll()
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
+                .authorizeRequests().antMatchers("/api/v1/users")
+                .authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(LogoutConfigurer::permitAll);
@@ -42,5 +45,11 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public AuthContext authContext() {
+        return new AuthContext();
     }
 }

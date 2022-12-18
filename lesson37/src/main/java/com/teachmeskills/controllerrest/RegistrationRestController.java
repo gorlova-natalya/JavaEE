@@ -6,10 +6,12 @@ import com.teachmeskills.facade.UserFacade;
 import com.teachmeskills.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -24,6 +26,7 @@ public class RegistrationRestController {
     private final UserConverter userConverter;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     protected CreateUserDto createUser(@Valid @RequestBody final CreateUserDto dto) {
         final User user = userFacade.createUser(dto.getLogin(), dto.getPassword());
         log.info("User {} registered", dto.getLogin());

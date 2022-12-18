@@ -4,6 +4,7 @@ import com.teachmeskills.converter.UserConverter;
 import com.teachmeskills.dto.UserDtoRest;
 import com.teachmeskills.facade.UserFacade;
 import com.teachmeskills.model.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@Tag(name = "Users", description = "Users API")
 public class UserRestController {
 
     private final UserFacade userFacade;
