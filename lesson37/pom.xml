@@ -25,7 +25,7 @@
         <spring-context.version>5.3.23</spring-context.version>
         <spring-boot-starter-web.version>2.7.5</spring-boot-starter-web.version>
         <lombok-mapstruct.version>0.2.0</lombok-mapstruct.version>
-        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
         <org.lombok.version>1.18.22</org.lombok.version>
         <springfox.version>3.0.0</springfox.version>
     </properties>

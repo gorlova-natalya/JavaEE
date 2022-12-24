@@ -27,7 +27,6 @@ public class JwtFilter extends GenericFilterBean {
     private final AuthService customUserDetailsService;
     private final AuthContext authContext;
 
-
     @Override
     public void doFilter(
             ServletRequest servletRequest,
