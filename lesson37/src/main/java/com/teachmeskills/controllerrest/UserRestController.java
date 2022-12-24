@@ -4,6 +4,7 @@ import com.teachmeskills.converter.UserConverter;
 import com.teachmeskills.dto.UserDtoRest;
 import com.teachmeskills.facade.UserFacade;
 import com.teachmeskills.model.User;
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -19,12 +20,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
-@Tag(name = "Users", description = "Users API")
+@Tag(name = "users", description = "Users API")
+@Api("/api/v1/users")
 public class UserRestController {
 
     private final UserFacade userFacade;
     private final UserConverter userConverter;
 
+    @Tag(name = "users")
     @GetMapping
     protected List<UserDtoRest> getUsers(@RequestParam(defaultValue = "1", name = "page", required = false) Integer pageNo,
                                          @RequestParam(defaultValue = "5", name = "pageSize", required = false) Integer pageSize) {
@@ -33,6 +36,7 @@ public class UserRestController {
         return userConverter.toDto(listUsers);
     }
 
+    @Tag(name = "users")
     @GetMapping("/{login}")
     protected List<UserDtoRest> getUsersByLogin(@PathVariable("login") String login) {
         if (StringUtils.isNotBlank(login)) {

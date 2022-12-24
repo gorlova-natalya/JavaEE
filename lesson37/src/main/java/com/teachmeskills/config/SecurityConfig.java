@@ -30,7 +30,7 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().formLogin()
+//                .and().formLogin()
                 .and().authorizeRequests()
                 .antMatchers("/*", "/api/v1/auth").permitAll()
                 .and()

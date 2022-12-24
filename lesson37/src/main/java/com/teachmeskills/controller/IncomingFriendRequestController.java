@@ -3,6 +3,7 @@ package com.teachmeskills.controller;
 import com.teachmeskills.facade.FriendRequestFacade;
 import com.teachmeskills.model.User;
 import com.teachmeskills.session.AuthContext;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -19,11 +20,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/incomingFriendRequests")
 @RequiredArgsConstructor
+@Tag(name = "friend requests")
 public class IncomingFriendRequestController {
 
     private final FriendRequestFacade friendRequestFacade;
     private final AuthContext authContext;
 
+    @Tag(name = "friend requests")
     @GetMapping
     protected String getIncomingRequests(Model model) {
         final long requestTo = authContext.getLoggedInUserId();
@@ -32,6 +35,7 @@ public class IncomingFriendRequestController {
         return "incomingRequests";
     }
 
+    @Tag(name = "friend requests")
     @PostMapping(path = "/{friendId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     protected String acceptFriendRequest(@PathVariable("friendId") Long requestFrom) {
         final long requestTo = authContext.getLoggedInUserId();
@@ -40,6 +44,7 @@ public class IncomingFriendRequestController {
         return "redirect:/incomingFriendRequests";
     }
 
+    @Tag(name = "friend requests")
     @DeleteMapping("/{friendId}")
     protected String deleteFriendRequest(@PathVariable("friendId") Long requestFrom) {
         final long requestTo = authContext.getLoggedInUserId();

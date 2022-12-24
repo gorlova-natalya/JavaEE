@@ -2,6 +2,7 @@ package com.teachmeskills.controller;
 
 import com.teachmeskills.facade.UserFacade;
 import com.teachmeskills.model.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@Tag(name = "users", description = "Users API")
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserFacade userFacade;
 
+    @Tag(name = "users")
     @GetMapping()
     protected String getUsers(@RequestParam(defaultValue = "1", name = "page", required = false) Integer pageNo,
                               @RequestParam(defaultValue = "5", name = "pageSize", required = false) Integer pageSize,
@@ -35,6 +38,7 @@ public class UserController {
         return "main";
     }
 
+    @Tag(name = "users")
     @GetMapping("/{login}")
     protected String getUsersByLogin(Model model, @PathVariable("login") String login) {
         if (StringUtils.isNotBlank(login)) {
