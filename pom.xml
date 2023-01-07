@@ -20,8 +20,9 @@
         <module>lesson32</module>
         <module>lesson32_2</module>
         <module>lesson35</module>
-        <module>lesson37</module>
+        <module>socialNetwork/lesson37</module>
         <module>lesson40</module>
+        <module>socialNetwork/lesson41</module>
     </modules>
 
     <properties>
