@@ -15,8 +15,8 @@ import java.util.List;
 @Transactional
 public interface MessageRepository extends JpaRepository<MessageDto, Long> {
 
-//    List<MessageDto> findMessageByMessageFromIdAndMessageToId(long messageFrom, long messageTo);
-//
+    List<MessageDto> findMessageByMessageFromIdAndMessageToId(long messageFrom, long messageTo);
+
     void deleteByMessageFromAndMessageTo(long requestFrom, long requestTo);
 
     @Query(value = "select user_id, friend_id, message from messages " +
