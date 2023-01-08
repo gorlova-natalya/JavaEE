@@ -19,7 +19,7 @@ public class MessageService {
     }
 
     public List<MessageDto> getMessages(long messageFrom, long messageTo) {
-        return messageRepository.getMessages(messageFrom, messageTo);
+        return messageRepository.findMessageDtoByMessageFromAndMessageTo(messageFrom, messageTo);
     }
 
     public void deleteDialog(long requestFrom, long requestTo) {
