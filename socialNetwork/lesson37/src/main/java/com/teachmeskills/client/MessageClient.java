@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(value = "message", url = "${services.message.url}")
+@FeignClient(name = "domain", url = "${services.message.url}")
 public interface MessageClient {
     @RequestMapping(method = RequestMethod.GET, value = "/messages/{friendId}")
     List<MessageDto> getMessages(@PathVariable("friendId") final int friendId,
