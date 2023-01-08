@@ -1,0 +1,45 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres:13.4-alpine"
+    container_name: "localhost"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "social_network"
+    ports:
+      - "35432:5432"
+  #    volumes:
+  #      - "./dev-env/postgres/init.sql:/docker-entrypoint-initdb.d/1-init.sql"
+  localstack:
+    container_name: "localstack"
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+      - "4572:4572"
+    environment:
+      - SERVICES:s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - ./scripts/localstack:/docker-entrypoint-initaws.d
+
+  lesson37:
+    container_name: "main"
+    image: main:latest
+    ports:
+      - "9090:9090"
+    depends_on:
+      - postgres
+      - localstack
+
+  lesson41:
+    container_name: "message-service"
+    image: message-service:latest
+    ports:
+      - "9091:9091"
+    depends_on:
+      - postgres
+      - localstack
+      - lesson37
