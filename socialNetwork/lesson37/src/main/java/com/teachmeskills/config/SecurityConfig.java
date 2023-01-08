@@ -32,7 +32,7 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and().formLogin()
                 .and().authorizeRequests()
-                .antMatchers("/*", "/api/v1/auth").permitAll()
+                .antMatchers("/*", "/api/v1/auth", "/message").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/v1/users")
                 .authenticated()

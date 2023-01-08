@@ -4,8 +4,10 @@ import com.example.messages.dto.MessageDto;
 import com.example.messages.model.Message;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface MessageConverter {
 
-    MessageDto toDto(final Message message);
+    List<MessageDto> toDto(final List<Message> message);
 }

@@ -1,9 +1,10 @@
 package com.example.messages.service;
 
-import com.example.messages.dto.MessageDto;
+import com.example.messages.model.Message;
 import com.example.messages.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,10 +16,12 @@ public class MessageService {
     }
 
     public void createMessage(Long messageFromUser, Long messageToUser, String messageText) {
-        messageRepository.saveMessage(messageFromUser, messageToUser, messageText);
+        final Message message = Message.builder().messageFrom(messageFromUser)
+                .messageTo(messageToUser).messageText(messageText).createdAt(LocalDateTime.now()).build();
+        messageRepository.save(message);
     }
 
-    public List<MessageDto> getMessages(long messageFrom, long messageTo) {
+    public List<Message> getMessages(long messageFrom, long messageTo) {
         return messageRepository.findMessageDtoByMessageFromAndMessageTo(messageFrom, messageTo);
     }
 

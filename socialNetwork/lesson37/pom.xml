@@ -30,7 +30,7 @@
         <org.lombok.version>1.18.22</org.lombok.version>
         <springfox.version>3.0.0</springfox.version>
         <jib.maven.plugin.version>3.3.1</jib.maven.plugin.version>
-        <feign.httpclient>12.1</feign.httpclient>
+        <feign.httpclient>11.8</feign.httpclient>
     </properties>
 
     <dependencyManagement>
@@ -301,7 +301,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-openfeign-core</artifactId>
-            <version>4.0.0</version>
+            <version>3.1.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>

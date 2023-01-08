@@ -28,7 +28,7 @@ public class MessageController {
     @GetMapping("/{friendId}")
     protected List<MessageDto> getMessages(@PathVariable("friendId") Long messageTo,
                                            @RequestParam Long messageFrom) {
-        return messageService.getMessages(messageFrom, messageTo);
+        return messageConverter.toDto(messageService.getMessages(messageFrom, messageTo));
     }
 
     @PostMapping(path = "/send/{friendId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
