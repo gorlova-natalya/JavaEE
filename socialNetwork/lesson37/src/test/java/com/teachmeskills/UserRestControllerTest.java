@@ -2,9 +2,8 @@ package com.teachmeskills;
 
 import com.teachmeskills.config.filter.JwtFilter;
 import com.teachmeskills.controllerrest.UserRestController;
-import com.teachmeskills.converter.UserConverter;
+import com.teachmeskills.dto.UserDto;
 import com.teachmeskills.facade.UserFacade;
-import com.teachmeskills.session.AuthContext;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -28,15 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private UserFacade userFacade;
-
-    @MockBean
-    private UserConverter userConverter;
-
-    @MockBean
-    private AuthContext authContext;
 
     @Test
     public void shouldReturnA403WhenUserIsNotLoggedIn() throws Exception {
@@ -65,5 +58,19 @@ public class UserRestControllerTest {
         then(userFacade)
                 .should()
                 .getUser(login);
+    }
+
+    @Test
+    @WithUserDetails
+    public void shouldReturn200whenCreatingAUser() throws Exception {
+        final String username = "username";
+        final String password = "password";
+        UserDto userDto = new UserDto();
+        userDto.setPassword(password);
+        userDto.setLogin(username);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/api/v1/users", userDto)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

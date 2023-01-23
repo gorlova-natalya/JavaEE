@@ -13,10 +13,14 @@ import java.util.List;
 public interface MessageClient {
     @RequestMapping(method = RequestMethod.GET, value = "/messages/{friendId}")
     List<MessageDto> getMessages(@PathVariable("friendId") final int friendId,
-                                    @RequestParam("userId") final int userId);
+                                 @RequestParam("userId") final int userId);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/send-message/{friendId}")
+    @RequestMapping(method = RequestMethod.POST, value = "/send/{friendId}")
     void sendMessage(@PathVariable("friendId") final int friendId,
                      @RequestParam("message") String message,
                      @RequestParam("userId") int userId);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/message/delete/{friendId}")
+    void deleteMessage(@PathVariable int friendId,
+                       @RequestParam int userId);
 }
