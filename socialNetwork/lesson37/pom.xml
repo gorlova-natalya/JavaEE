@@ -31,6 +31,7 @@
         <springfox.version>3.0.0</springfox.version>
         <jib.maven.plugin.version>3.3.1</jib.maven.plugin.version>
         <feign.httpclient>11.8</feign.httpclient>
+        <spring.cloud.starter.openfeign>3.1.4</spring.cloud.starter.openfeign>
     </properties>
 
     <dependencyManagement>
@@ -301,7 +302,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-openfeign-core</artifactId>
-            <version>3.1.4</version>
+            <version>2.2.6.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -486,11 +487,14 @@
                 </executions>
                 <configuration>
                     <from>
-                        <image>openjdk</image>
-                        <image>openjdk:17-bullseye</image>
+                        <image>openjdk:17-jdk-slim-bullseye</image>
                     </from>
                     <to>
                         <image>main</image>
+                        <tags>
+                            <tag>latest</tag>
+                        </tags>
+                        <image>message-service</image>
                         <tags>
                             <tag>latest</tag>
                         </tags>

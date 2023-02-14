@@ -34,4 +34,4 @@ feign:
 
 services:
   message:
-    url: 'http://localhost:9091'
+    url: 'http://message-service:9091'

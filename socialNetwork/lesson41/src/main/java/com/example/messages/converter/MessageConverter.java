@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = UserConverter.class)
 public interface MessageConverter {
 
     List<MessageDto> toDto(final List<Message> message);

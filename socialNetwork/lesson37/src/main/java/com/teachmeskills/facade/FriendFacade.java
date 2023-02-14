@@ -1,5 +1,6 @@
 package com.teachmeskills.facade;
 
+import com.teachmeskills.dto.GetMessageDto;
 import com.teachmeskills.model.Friend;
 import com.teachmeskills.model.User;
 import com.teachmeskills.service.FriendService;
@@ -27,6 +28,8 @@ public class FriendFacade {
 
     public void deleteFriendAndDialog(long requestFrom, long requestTo) {
         friendService.deleteFriend(requestFrom, requestTo);
-        messageService.deleteDialog(requestFrom, requestTo);
+        final GetMessageDto getMessageDto = GetMessageDto.builder().messageFrom(requestFrom)
+                .messageTo(requestTo).build();
+        messageService.deleteDialog(getMessageDto);
     }
 }

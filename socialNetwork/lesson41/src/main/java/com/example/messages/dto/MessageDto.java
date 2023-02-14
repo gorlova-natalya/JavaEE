@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MessageDto {
 
-    private long messageId;
-    private long messageFrom;
-    private long messageTo;
+    private Long messageId;
+    private UserDto messageFrom;
+    private UserDto messageTo;
     private String messageText;
     private LocalDateTime createdAt;
 }

@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -25,8 +27,18 @@ public class Message {
     @Column(name = "message_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long messageId;
-    long messageFrom;
-    long messageTo;
-    String messageText;
-    LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User messageFrom;
+
+    @ManyToOne
+    @JoinColumn(name = "friend_id", referencedColumnName = "id")
+    private User messageTo;
+
+    @Column(name = "message")
+    private String messageText;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }

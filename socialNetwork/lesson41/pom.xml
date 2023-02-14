@@ -486,10 +486,10 @@
                 </executions>
                 <configuration>
                     <from>
-                        <image>openjdk:17-bullseye</image>
+                        <image>openjdk:17-jdk-slim-bullseye</image>
                     </from>
                     <to>
-                        <image>lesson41</image>
+                        <image>message-service</image>
                         <tags>
                             <tag>latest</tag>
                         </tags>

@@ -1,23 +1,23 @@
 package com.example.messages.service;
 
+import com.example.messages.dto.CreateMessageDto;
 import com.example.messages.model.Message;
 import com.example.messages.repository.MessageRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
     private final MessageRepository messageRepository;
 
-    public MessageService(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
-    }
-
-    public void createMessage(Long messageFromUser, Long messageToUser, String messageText) {
-        final Message message = Message.builder().messageFrom(messageFromUser)
-                .messageTo(messageToUser).messageText(messageText).createdAt(LocalDateTime.now()).build();
+    public void createMessage(final CreateMessageDto createMessageDto) {
+        final Message message = Message.builder().messageFrom(createMessageDto.getMessageFrom())
+                .messageTo(createMessageDto.getMessageTo()).messageText(createMessageDto.getMessageText())
+                .createdAt(LocalDateTime.now()).build();
         messageRepository.save(message);
     }
 

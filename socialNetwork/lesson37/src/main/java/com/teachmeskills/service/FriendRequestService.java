@@ -6,8 +6,8 @@ import com.teachmeskills.repository.FriendRequestRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class FriendRequestService {
 
     private final FriendRequestRepository friendRequestRepository;
