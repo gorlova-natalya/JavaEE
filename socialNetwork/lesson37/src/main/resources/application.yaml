@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 8080
 
 spring:
   datasource:
@@ -34,4 +34,4 @@ feign:
 
 services:
   message:
-    url: 'http://message-service:9091'
+    url: 'http://message-service:8081'

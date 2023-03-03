@@ -29,7 +29,8 @@ public class MessageController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     protected List<MessageDto> getMessages(@Valid @RequestBody final GetMessageDto getMessageDto) {
-        return messageConverter.toDto(messageService.getMessages(getMessageDto.getMessageFrom(), getMessageDto.getMessageTo()));
+        return messageConverter.toDto(messageService.getMessages(getMessageDto.getMessageFrom(),
+                getMessageDto.getMessageTo()));
     }
 
     @PostMapping(path = "/send", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
