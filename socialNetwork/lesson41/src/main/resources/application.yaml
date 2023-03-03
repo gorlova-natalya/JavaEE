@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: 'org.postgresql.Driver'
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:35432/postgres
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
+  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: true
+    pathmatch:
+      matching-strategy: ant_path_matcher
+

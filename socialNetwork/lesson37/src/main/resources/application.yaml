@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:35432/postgres
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+hashSecret: SECRET
+complexity: 12
+jwtSecret: "SECRET"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+feign:
+  client:
+    config:
+      domain:
+        connectTimeout: 5000
+        readTimeout: 3000
+
+services:
+  message:
+    url: 'http://message-service:8081'
