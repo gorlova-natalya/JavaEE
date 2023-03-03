@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:35432/postgres
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+hashSecret: SECRET
+complexity: 12
+jwtSecret: "SECRET"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
